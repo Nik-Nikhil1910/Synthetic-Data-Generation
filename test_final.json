@@ -1,0 +1,90 @@
+{
+  "tables": [
+    {
+      "name": "course",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "is_pk": true,
+          "is_nullable": false
+        },
+        {
+          "name": "teacher_id",
+          "type": "INTEGER",
+          "is_pk": false,
+          "is_nullable": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "column": "teacher_id",
+          "references_table": "teacher",
+          "references_column": "id",
+          "is_nullable": false
+        }
+      ]
+    },
+    {
+      "name": "student",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "is_pk": true,
+          "is_nullable": false
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "teacher",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "is_pk": true,
+          "is_nullable": false
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "course_student",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "is_pk": true,
+          "is_nullable": false
+        },
+        {
+          "name": "course_id",
+          "type": "INTEGER",
+          "is_pk": false,
+          "is_nullable": false
+        },
+        {
+          "name": "student_id",
+          "type": "INTEGER",
+          "is_pk": false,
+          "is_nullable": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "column": "course_id",
+          "references_table": "course",
+          "references_column": "id",
+          "is_nullable": false
+        },
+        {
+          "column": "student_id",
+          "references_table": "student",
+          "references_column": "id",
+          "is_nullable": false
+        }
+      ]
+    }
+  ]
+}

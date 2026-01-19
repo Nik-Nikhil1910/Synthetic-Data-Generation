@@ -103,6 +103,8 @@ STOP_WORDS = frozenset({
     "old", "good", "bad", "high", "low", "large", "small", "long", "short",
     "system", "management", "platform", "application", "software", "service",
     "data", "information", "process", "workflow", "using", "based",
+    "relationship", "relationships", "entity", "entities", "table", "tables",
+    "type", "types", "record", "records", "database", "schema", "model",
 })
 
 # Relationship indicator patterns (domain-agnostic linguistic cues).
@@ -159,15 +161,24 @@ def _singularize(word: str) -> str:
     Domain-agnostic heuristic.
     """
     word = word.lower()
+    
+    # Handle -ies -> -y (e.g., "categories" -> "category")
     if word.endswith("ies") and len(word) > 3:
         return word[:-3] + "y"
-    if word.endswith("es") and len(word) > 2:
-        # Handle cases like "classes" -> "class", "boxes" -> "box"
-        if word.endswith("sses") or word.endswith("xes") or word.endswith("ches") or word.endswith("shes"):
-            return word[:-2]
-        return word[:-2] if word[-3] in "sxzh" else word[:-1]
+    
+    # Handle -ses, -xes, -zes, -ches, -shes -> remove "es"
+    # (e.g., "classes" -> "class", "boxes" -> "box")
+    if word.endswith(("sses", "xes", "zes", "ches", "shes")):
+        return word[:-2]
+    
+    # Handle -oes -> -o (e.g., "heroes" -> "hero") but not "shoes"
+    if word.endswith("oes") and len(word) > 3 and word not in ("shoes", "canoes"):
+        return word[:-2]
+    
+    # Handle regular -s plurals (but not words ending in -ss like "class")
     if word.endswith("s") and len(word) > 1 and not word.endswith("ss"):
         return word[:-1]
+    
     return word
 
 
