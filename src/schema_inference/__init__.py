@@ -20,22 +20,32 @@ from .infer_schema import (
     finalize_schema,
     refine_understanding,
     generate_schema_from_text,
-    validate_schema_with_feedback,
     
-    # Data structures
+    # Data structures (workflow-specific)
     RefinedUnderstanding,
-    ValidationFeedback,
     
-    # Exceptions
+    # Exceptions (workflow-specific)
     SchemaInferenceError,
     NoEntitiesFoundError,
-    ContractViolationError,
     AmbiguousRelationshipError,
     LLMUnavailableError,
-    TerminationError,
     
     # Deprecated (raises DeprecationWarning)
     infer_schema,
+)
+
+# Validation-related imports from dedicated validator module
+from .infer_schema_validator import (
+    # Validation functions
+    validate_schema_with_feedback,
+    validate_and_handle_termination,
+    
+    # Data structures
+    ValidationFeedback,
+    
+    # Exceptions
+    ContractViolationError,
+    TerminationError,
 )
 
 __all__ = [
@@ -45,6 +55,7 @@ __all__ = [
     "refine_understanding",
     "generate_schema_from_text",
     "validate_schema_with_feedback",
+    "validate_and_handle_termination",
     
     # Data structures
     "RefinedUnderstanding",
