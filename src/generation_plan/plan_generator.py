@@ -4,19 +4,39 @@ Generation Plan Generator
 
 Purpose:
 --------
-Accepts a Schema JSON (output of infer_schema.py) and produces a
-Generation Plan JSON conforming to the contract in Project Plan §3.3.
+Accepts a validated Schema JSON from Stage 0 (Schema Inference) and produces a
+Generation Plan JSON conforming to the project contract.
+
+Input Contract (Stage 0 Output):
+--------------------------------
+The input schema MUST match the Schema Inference Contract:
+{
+  "tables": [
+    {
+      "name": "string (snake_case)",
+      "columns": [
+        {"name": str, "type": str, "is_pk": bool, "is_nullable": bool}
+      ],
+      "foreign_keys": [
+        {"column": str, "references_table": str, "references_column": str, "is_nullable": bool}
+      ]
+    }
+  ]
+}
 
 Public Interface:
 -----------------
-    def generate_plan(schema: dict) -> dict
+    def generate_plan(schema: dict, row_count: int = 50) -> dict
 
 Contract Compliance:
 --------------------
-- Topological sorting of tables (parents before children).
-- Explicit PK, FK, and Faker column mappings.
-- Deterministic and reproducible output.
-- No GenAI usage.
+- Input schema is treated as FINAL and AUTHORITATIVE
+- No heuristic inference or schema recovery
+- Any schema issues result in validation failure (not correction)
+- Topological sorting of tables (parents before children)
+- Explicit PK, FK, and Faker column mappings
+- Deterministic and reproducible output
+- No GenAI usage
 """
 
 from typing import Any
@@ -140,8 +160,197 @@ SQL_TYPE_FALLBACK: dict[str, str] = {
 
 
 # =============================================================================
+# INPUT SCHEMA VALIDATION
+# =============================================================================
+
+# Allowed SQL types per Stage 0 contract
+ALLOWED_SQL_TYPES = frozenset({
+    "INTEGER", "VARCHAR", "TEXT", "BOOLEAN", "DATE", "DATETIME", "FLOAT"
+})
+
+
+def _validate_input_schema(schema: dict) -> None:
+    """
+    Validate input schema matches Stage 0 contract.
+    
+    This is strict validation with NO RECOVERY. Any schema issues
+    result in InvalidSchemaError being raised.
+    
+    Args:
+        schema: Schema dict from Stage 0.
+        
+    Raises:
+        InvalidSchemaError: If schema is invalid or incomplete.
+    """
+    if not isinstance(schema, dict):
+        raise InvalidSchemaError("Schema must be a dictionary.")
+    
+    if "tables" not in schema:
+        raise InvalidSchemaError("Schema must contain a 'tables' key.")
+    
+    if not isinstance(schema["tables"], list):
+        raise InvalidSchemaError("'tables' must be a list.")
+    
+    if len(schema["tables"]) == 0:
+        raise InvalidSchemaError("Schema must contain at least one table.")
+    
+    all_table_names: set[str] = set()
+    
+    for i, table in enumerate(schema["tables"]):
+        _validate_table(table, i, all_table_names)
+    
+    # Second pass: validate FK references
+    for table in schema["tables"]:
+        _validate_fk_references(table, all_table_names, schema)
+
+
+def _validate_table(table: dict, index: int, all_table_names: set[str]) -> None:
+    """Validate a single table structure."""
+    if not isinstance(table, dict):
+        raise InvalidSchemaError(f"Table at index {index} must be a dictionary.")
+    
+    # Validate table name
+    if "name" not in table:
+        raise InvalidSchemaError(f"Table at index {index} missing 'name' field.")
+    
+    table_name = table["name"]
+    if not isinstance(table_name, str) or not table_name:
+        raise InvalidSchemaError(f"Table at index {index} 'name' must be non-empty string.")
+    
+    if table_name in all_table_names:
+        raise InvalidSchemaError(f"Duplicate table name: '{table_name}'.")
+    all_table_names.add(table_name)
+    
+    # Validate columns
+    if "columns" not in table:
+        raise InvalidSchemaError(f"Table '{table_name}' missing 'columns' field.")
+    
+    if not isinstance(table["columns"], list):
+        raise InvalidSchemaError(f"Table '{table_name}' 'columns' must be a list.")
+    
+    if len(table["columns"]) == 0:
+        raise InvalidSchemaError(f"Table '{table_name}' must have at least one column.")
+    
+    column_names: set[str] = set()
+    pk_count = 0
+    
+    for j, col in enumerate(table["columns"]):
+        pk_count += _validate_column(col, j, table_name, column_names)
+    
+    if pk_count != 1:
+        raise InvalidSchemaError(
+            f"Table '{table_name}' must have exactly one primary key, found {pk_count}."
+        )
+    
+    # Validate foreign_keys (optional field, but must be list if present)
+    if "foreign_keys" in table:
+        if not isinstance(table["foreign_keys"], list):
+            raise InvalidSchemaError(f"Table '{table_name}' 'foreign_keys' must be a list.")
+        
+        for fk in table["foreign_keys"]:
+            _validate_fk_structure(fk, table_name, column_names)
+
+
+def _validate_column(col: dict, index: int, table_name: str, column_names: set[str]) -> int:
+    """Validate a single column structure. Returns 1 if PK, 0 otherwise."""
+    if not isinstance(col, dict):
+        raise InvalidSchemaError(
+            f"Column at index {index} in table '{table_name}' must be a dictionary."
+        )
+    
+    # Required fields
+    for field in ("name", "type", "is_pk", "is_nullable"):
+        if field not in col:
+            raise InvalidSchemaError(
+                f"Column at index {index} in table '{table_name}' missing '{field}'."
+            )
+    
+    col_name = col["name"]
+    if not isinstance(col_name, str) or not col_name:
+        raise InvalidSchemaError(
+            f"Column at index {index} in table '{table_name}' 'name' must be non-empty string."
+        )
+    
+    if col_name in column_names:
+        raise InvalidSchemaError(f"Duplicate column '{col_name}' in table '{table_name}'.")
+    column_names.add(col_name)
+    
+    # Validate type
+    if col["type"] not in ALLOWED_SQL_TYPES:
+        raise InvalidSchemaError(
+            f"Column '{table_name}.{col_name}' has invalid type '{col['type']}'. "
+            f"Allowed: {sorted(ALLOWED_SQL_TYPES)}."
+        )
+    
+    # Validate booleans
+    if not isinstance(col["is_pk"], bool):
+        raise InvalidSchemaError(
+            f"Column '{table_name}.{col_name}' 'is_pk' must be boolean."
+        )
+    if not isinstance(col["is_nullable"], bool):
+        raise InvalidSchemaError(
+            f"Column '{table_name}.{col_name}' 'is_nullable' must be boolean."
+        )
+    
+    # PK constraints
+    if col["is_pk"]:
+        if col["is_nullable"]:
+            raise InvalidSchemaError(
+                f"Primary key '{table_name}.{col_name}' cannot be nullable."
+            )
+        if col["type"] not in ("INTEGER", "VARCHAR"):
+            raise InvalidSchemaError(
+                f"Primary key '{table_name}.{col_name}' must be INTEGER or VARCHAR."
+            )
+        return 1
+    
+    return 0
+
+
+def _validate_fk_structure(fk: dict, table_name: str, column_names: set[str]) -> None:
+    """Validate FK structure within a table."""
+    if not isinstance(fk, dict):
+        raise InvalidSchemaError(f"FK in table '{table_name}' must be a dictionary.")
+    
+    for field in ("column", "references_table", "references_column"):
+        if field not in fk:
+            raise InvalidSchemaError(f"FK in table '{table_name}' missing '{field}'.")
+    
+    if fk["column"] not in column_names:
+        raise InvalidSchemaError(
+            f"FK column '{fk['column']}' does not exist in table '{table_name}'."
+        )
+
+
+def _validate_fk_references(table: dict, all_table_names: set[str], schema: dict) -> None:
+    """Validate FK references point to existing tables/columns."""
+    table_name = table["name"]
+    
+    # Build column lookup for all tables
+    table_columns: dict[str, set[str]] = {}
+    for t in schema["tables"]:
+        table_columns[t["name"]] = {c["name"] for c in t["columns"]}
+    
+    for fk in table.get("foreign_keys", []):
+        ref_table = fk["references_table"]
+        ref_column = fk["references_column"]
+        
+        if ref_table not in all_table_names:
+            raise InvalidSchemaError(
+                f"FK in table '{table_name}' references non-existent table '{ref_table}'."
+            )
+        
+        if ref_column not in table_columns.get(ref_table, set()):
+            raise InvalidSchemaError(
+                f"FK in table '{table_name}' references non-existent column "
+                f"'{ref_table}.{ref_column}'."
+            )
+
+
+# =============================================================================
 # HELPER FUNCTIONS
 # =============================================================================
+
 
 def _get_faker_provider(column_name: str, column_type: str) -> str:
     """
@@ -345,24 +554,26 @@ def _build_column_specs(
 
 def generate_plan(schema: dict, row_count: int = DEFAULT_ROW_COUNT) -> dict:
     """
-    Generate a Generation Plan from a Schema JSON.
+    Generate a Generation Plan from a validated Stage 0 Schema JSON.
+    
+    The input schema is treated as FINAL and AUTHORITATIVE. No heuristic
+    inference or schema recovery is performed. Any schema issues result
+    in InvalidSchemaError being raised.
     
     Args:
-        schema: Schema JSON from infer_schema.py
-        row_count: Default row count per table (default: 50)
+        schema: Validated Schema JSON from Stage 0 (Schema Inference).
+        row_count: Default row count per table (default: 50).
     
     Returns:
         Generation Plan JSON conforming to the contract.
     
     Raises:
         CircularDependencyError: If tables have circular dependencies.
-        InvalidSchemaError: If the schema is invalid.
+        InvalidSchemaError: If the schema is invalid or doesn't match contract.
     """
-    if not schema or "tables" not in schema:
-        raise InvalidSchemaError("Schema must contain a 'tables' key.")
-    
-    if not schema["tables"]:
-        raise InvalidSchemaError("Schema must contain at least one table.")
+    # Step 0: Validate input schema (strict, no recovery)
+    _validate_input_schema(schema)
+
     
     # Step 1: Build dependency graph and identify junction tables
     graph, junction_tables = _build_dependency_graph(schema)
@@ -385,16 +596,8 @@ def generate_plan(schema: dict, row_count: int = DEFAULT_ROW_COUNT) -> dict:
     
     # Create lookup for tables by name
     table_lookup = {t["name"]: t for t in schema["tables"]}
-    all_table_names = set(table_lookup.keys())
-    
-    # Validate FK references point to existing tables
-    for table in schema["tables"]:
-        for fk in table.get("foreign_keys", []):
-            ref_table = fk["references_table"]
-            if ref_table not in all_table_names:
-                raise InvalidSchemaError(
-                    f"Table '{table['name']}' has FK referencing non-existent table '{ref_table}'"
-                )
+    # Note: FK validation now handled by _validate_input_schema
+
     
     # Build table plans
     table_plans: list[dict] = []
