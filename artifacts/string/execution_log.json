@@ -1,0 +1,12 @@
+{
+  "tables": [
+    "users",
+    "posts",
+    "comments"
+  ],
+  "row_counts": {
+    "users": 50,
+    "posts": 50,
+    "comments": 100
+  }
+}

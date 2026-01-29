@@ -1,0 +1,17 @@
+{
+  "json": [
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\users.json",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\posts.json",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\comments.json"
+  ],
+  "csv": [
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\users.csv",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\posts.csv",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\comments.csv"
+  ],
+  "sql": {
+    "sqlite": "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\export_sqlite.sql",
+    "postgresql": null,
+    "mysql": null
+  }
+}

@@ -1,0 +1,1 @@
+schema for a school database that stores student information.

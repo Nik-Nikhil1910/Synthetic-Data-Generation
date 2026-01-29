@@ -61,7 +61,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
 # Import validation logic from dedicated validator module
-from schema_inference.infer_schema_validator import (
+from .infer_schema_validator import (
     ContractViolationError,
     TerminationError,
     ValidationFeedback,
@@ -200,7 +200,7 @@ def _get_llm() -> ChatGoogleGenerativeAI:
     
     try:
         return ChatGoogleGenerativeAI(
-            model="gemini-2.5-pro-preview-05-06",
+            model="gemini-2.0-flash",  # Valid, stable model
             google_api_key=api_key,
             temperature=0.1,  # Low temperature for deterministic outputs
         )
@@ -281,6 +281,57 @@ def refine_understanding(description: str) -> RefinedUnderstanding:
         assumptions=[],
         ambiguities=[],
     )
+
+
+def refine_understanding_with_feedback(
+    description: str,
+    feedback: "ValidationFeedback"
+) -> RefinedUnderstanding:
+    """
+    Refine the description using validation feedback (for attempt 2).
+    
+    When schema validation fails, this function takes the original description
+    and the validation errors, then uses the LLM to produce an improved
+    description that addresses the errors.
+    
+    Args:
+        description: The original refined description that failed validation.
+        feedback: ValidationFeedback containing errors and suggestions.
+        
+    Returns:
+        RefinedUnderstanding with improved text.
+        
+    Raises:
+        LLMUnavailableError: If Gemini is not available.
+        NoEntitiesFoundError: If description is empty.
+    """
+    if not description or not description.strip():
+        raise NoEntitiesFoundError("Empty description provided for refinement.")
+    
+    llm = _get_llm()
+    prompt = _get_prompt("phase_1_refinement_with_feedback")
+    chain = prompt | llm | StrOutputParser()
+    
+    # Format errors for the prompt
+    error_text = "\n".join([f"- {e}" for e in feedback.errors])
+    
+    try:
+        refined_text = chain.invoke({
+            "description": description,
+            "feedback": error_text
+        })
+    except Exception as e:
+        raise LLMUnavailableError(f"LLM call failed during refinement with feedback: {e}")
+    
+    return RefinedUnderstanding(
+        authoritative_description=refined_text,
+        entities=[],
+        relationships=[],
+        assumptions=[],
+        ambiguities=[],
+    )
+
+
 # NOTE: Parsing functions (_parse_entities_from_text, _parse_relationships_from_text,
 # _parse_section) have been removed. Phase 1 is human-first and does not attempt
 # to extract structured data from free-form text. Advisory fields are left empty.

@@ -1,0 +1,126 @@
+{
+  "tables": [
+    {
+      "name": "users",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "is_pk": true,
+          "is_nullable": false
+        },
+        {
+          "name": "username",
+          "type": "VARCHAR",
+          "is_pk": false,
+          "is_nullable": false
+        },
+        {
+          "name": "password",
+          "type": "VARCHAR",
+          "is_pk": false,
+          "is_nullable": false
+        },
+        {
+          "name": "email",
+          "type": "VARCHAR",
+          "is_pk": false,
+          "is_nullable": false
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "posts",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "is_pk": true,
+          "is_nullable": false
+        },
+        {
+          "name": "user_id",
+          "type": "INTEGER",
+          "is_pk": false,
+          "is_nullable": false
+        },
+        {
+          "name": "title",
+          "type": "VARCHAR",
+          "is_pk": false,
+          "is_nullable": false
+        },
+        {
+          "name": "content",
+          "type": "TEXT",
+          "is_pk": false,
+          "is_nullable": false
+        },
+        {
+          "name": "publication_date",
+          "type": "DATETIME",
+          "is_pk": false,
+          "is_nullable": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "column": "user_id",
+          "references_table": "users",
+          "references_column": "id",
+          "is_nullable": false
+        }
+      ]
+    },
+    {
+      "name": "comments",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "is_pk": true,
+          "is_nullable": false
+        },
+        {
+          "name": "post_id",
+          "type": "INTEGER",
+          "is_pk": false,
+          "is_nullable": false
+        },
+        {
+          "name": "user_id",
+          "type": "INTEGER",
+          "is_pk": false,
+          "is_nullable": false
+        },
+        {
+          "name": "text",
+          "type": "TEXT",
+          "is_pk": false,
+          "is_nullable": false
+        },
+        {
+          "name": "date_posted",
+          "type": "DATETIME",
+          "is_pk": false,
+          "is_nullable": false
+        }
+      ],
+      "foreign_keys": [
+        {
+          "column": "post_id",
+          "references_table": "posts",
+          "references_column": "id",
+          "is_nullable": false
+        },
+        {
+          "column": "user_id",
+          "references_table": "users",
+          "references_column": "id",
+          "is_nullable": false
+        }
+      ]
+    }
+  ]
+}

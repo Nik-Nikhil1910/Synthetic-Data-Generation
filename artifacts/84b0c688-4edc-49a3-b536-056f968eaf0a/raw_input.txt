@@ -1,0 +1,1 @@
+A blog platform where users can write posts and comment on them

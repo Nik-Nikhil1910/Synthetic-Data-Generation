@@ -1,0 +1,22 @@
+# =============================================================================
+# AI-Driven Synthetic Data Generator - Requirements
+# =============================================================================
+
+# Web Framework
+fastapi>=0.115.0
+uvicorn>=0.32.0
+
+# Data Validation
+pydantic>=2.10.0
+python-dotenv>=1.0.0
+
+# Data Generation
+faker>=33.0.0
+
+# LangChain / GenAI Integration
+langchain-core>=0.3.0
+langchain-google-genai>=2.0.0
+
+# Development (optional)
+pytest>=8.0.0
+httpx>=0.27.0  # For TestClient

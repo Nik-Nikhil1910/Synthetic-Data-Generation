@@ -1,0 +1,132 @@
+{
+  "meta": {
+    "faker_seed": 0,
+    "version": "0.1.0"
+  },
+  "execution_order": [
+    "users",
+    "posts",
+    "comments"
+  ],
+  "tables": [
+    {
+      "name": "users",
+      "row_count": 50,
+      "columns": [
+        {
+          "name": "id",
+          "generator_type": "primary_key",
+          "strategy": "sequential_integer"
+        },
+        {
+          "name": "username",
+          "generator_type": "faker",
+          "faker_provider": "user_name",
+          "is_nullable": false,
+          "null_probability": 0.0
+        },
+        {
+          "name": "password",
+          "generator_type": "faker",
+          "faker_provider": "lexify",
+          "is_nullable": false,
+          "null_probability": 0.0
+        },
+        {
+          "name": "email",
+          "generator_type": "faker",
+          "faker_provider": "email",
+          "is_nullable": false,
+          "null_probability": 0.0
+        }
+      ]
+    },
+    {
+      "name": "posts",
+      "row_count": 50,
+      "columns": [
+        {
+          "name": "id",
+          "generator_type": "primary_key",
+          "strategy": "sequential_integer"
+        },
+        {
+          "name": "user_id",
+          "generator_type": "foreign_key",
+          "references": {
+            "table": "users",
+            "column": "id"
+          },
+          "is_nullable": false,
+          "null_probability": 0.0
+        },
+        {
+          "name": "title",
+          "generator_type": "faker",
+          "faker_provider": "sentence",
+          "is_nullable": false,
+          "null_probability": 0.0
+        },
+        {
+          "name": "content",
+          "generator_type": "faker",
+          "faker_provider": "paragraph",
+          "is_nullable": false,
+          "null_probability": 0.0
+        },
+        {
+          "name": "publication_date",
+          "generator_type": "faker",
+          "faker_provider": "date_this_year",
+          "is_nullable": false,
+          "null_probability": 0.0
+        }
+      ]
+    },
+    {
+      "name": "comments",
+      "row_count": 100,
+      "columns": [
+        {
+          "name": "id",
+          "generator_type": "primary_key",
+          "strategy": "sequential_integer"
+        },
+        {
+          "name": "post_id",
+          "generator_type": "foreign_key",
+          "references": {
+            "table": "posts",
+            "column": "id"
+          },
+          "is_nullable": false,
+          "null_probability": 0.0
+        },
+        {
+          "name": "user_id",
+          "generator_type": "foreign_key",
+          "references": {
+            "table": "users",
+            "column": "id"
+          },
+          "is_nullable": false,
+          "null_probability": 0.0
+        },
+        {
+          "name": "text",
+          "generator_type": "faker",
+          "faker_provider": "paragraph",
+          "is_nullable": false,
+          "null_probability": 0.0
+        },
+        {
+          "name": "date_posted",
+          "generator_type": "faker",
+          "faker_provider": "date_this_year",
+          "is_nullable": false,
+          "null_probability": 0.0
+        }
+      ]
+    }
+  ]
+}

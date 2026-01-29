@@ -19,6 +19,7 @@ from .infer_schema import (
     infer_schema_interactive,
     finalize_schema,
     refine_understanding,
+    refine_understanding_with_feedback,
     generate_schema_from_text,
     
     # Data structures (workflow-specific)
@@ -53,6 +54,7 @@ __all__ = [
     "infer_schema_interactive",
     "finalize_schema",
     "refine_understanding",
+    "refine_understanding_with_feedback",
     "generate_schema_from_text",
     "validate_schema_with_feedback",
     "validate_and_handle_termination",
