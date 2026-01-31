@@ -1,7 +1,7 @@
 {
   "tables": [
     {
-      "name": "users",
+      "name": "farm",
       "columns": [
         {
           "name": "id",
@@ -10,28 +10,34 @@
           "is_nullable": false
         },
         {
-          "name": "username",
+          "name": "name",
           "type": "VARCHAR",
           "is_pk": false,
-          "is_nullable": false
+          "is_nullable": true
         },
         {
-          "name": "password",
+          "name": "location",
           "type": "VARCHAR",
           "is_pk": false,
-          "is_nullable": false
+          "is_nullable": true
         },
         {
-          "name": "email",
-          "type": "VARCHAR",
+          "name": "size",
+          "type": "FLOAT",
           "is_pk": false,
-          "is_nullable": false
+          "is_nullable": true
+        },
+        {
+          "name": "contact_information",
+          "type": "TEXT",
+          "is_pk": false,
+          "is_nullable": true
         }
       ],
       "foreign_keys": []
     },
     {
-      "name": "posts",
+      "name": "field",
       "columns": [
         {
           "name": "id",
@@ -40,41 +46,41 @@
           "is_nullable": false
         },
         {
-          "name": "user_id",
+          "name": "farm_id",
           "type": "INTEGER",
           "is_pk": false,
           "is_nullable": false
         },
         {
-          "name": "title",
+          "name": "size",
+          "type": "FLOAT",
+          "is_pk": false,
+          "is_nullable": true
+        },
+        {
+          "name": "location",
           "type": "VARCHAR",
           "is_pk": false,
-          "is_nullable": false
+          "is_nullable": true
         },
         {
-          "name": "content",
-          "type": "TEXT",
+          "name": "soil_type",
+          "type": "VARCHAR",
           "is_pk": false,
-          "is_nullable": false
-        },
-        {
-          "name": "publication_date",
-          "type": "DATETIME",
-          "is_pk": false,
-          "is_nullable": false
+          "is_nullable": true
         }
       ],
       "foreign_keys": [
         {
-          "column": "user_id",
-          "references_table": "users",
+          "column": "farm_id",
+          "references_table": "farm",
           "references_column": "id",
           "is_nullable": false
         }
       ]
     },
     {
-      "name": "comments",
+      "name": "crop",
       "columns": [
         {
           "name": "id",
@@ -83,40 +89,296 @@
           "is_nullable": false
         },
         {
-          "name": "post_id",
-          "type": "INTEGER",
+          "name": "variety",
+          "type": "VARCHAR",
           "is_pk": false,
-          "is_nullable": false
+          "is_nullable": true
         },
         {
-          "name": "user_id",
-          "type": "INTEGER",
+          "name": "planting_date",
+          "type": "DATE",
           "is_pk": false,
-          "is_nullable": false
+          "is_nullable": true
         },
         {
-          "name": "text",
+          "name": "expected_yield",
+          "type": "FLOAT",
+          "is_pk": false,
+          "is_nullable": true
+        },
+        {
+          "name": "care_requirements",
           "type": "TEXT",
           "is_pk": false,
+          "is_nullable": true
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "animal",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "is_pk": true,
           "is_nullable": false
         },
         {
-          "name": "date_posted",
-          "type": "DATETIME",
+          "name": "species",
+          "type": "VARCHAR",
+          "is_pk": false,
+          "is_nullable": true
+        },
+        {
+          "name": "breed",
+          "type": "VARCHAR",
+          "is_pk": false,
+          "is_nullable": true
+        },
+        {
+          "name": "birthdate",
+          "type": "DATE",
+          "is_pk": false,
+          "is_nullable": true
+        },
+        {
+          "name": "health_records",
+          "type": "TEXT",
+          "is_pk": false,
+          "is_nullable": true
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "employee",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "is_pk": true,
+          "is_nullable": false
+        },
+        {
+          "name": "farm_id",
+          "type": "INTEGER",
+          "is_pk": false,
+          "is_nullable": false
+        },
+        {
+          "name": "name",
+          "type": "VARCHAR",
+          "is_pk": false,
+          "is_nullable": true
+        },
+        {
+          "name": "contact_information",
+          "type": "TEXT",
+          "is_pk": false,
+          "is_nullable": true
+        },
+        {
+          "name": "job_title",
+          "type": "VARCHAR",
+          "is_pk": false,
+          "is_nullable": true
+        },
+        {
+          "name": "pay_rate",
+          "type": "FLOAT",
+          "is_pk": false,
+          "is_nullable": true
+        }
+      ],
+      "foreign_keys": [
+        {
+          "column": "farm_id",
+          "references_table": "farm",
+          "references_column": "id",
+          "is_nullable": false
+        }
+      ]
+    },
+    {
+      "name": "equipment",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "is_pk": true,
+          "is_nullable": false
+        },
+        {
+          "name": "farm_id",
+          "type": "INTEGER",
+          "is_pk": false,
+          "is_nullable": false
+        },
+        {
+          "name": "make",
+          "type": "VARCHAR",
+          "is_pk": false,
+          "is_nullable": true
+        },
+        {
+          "name": "model",
+          "type": "VARCHAR",
+          "is_pk": false,
+          "is_nullable": true
+        },
+        {
+          "name": "purchase_date",
+          "type": "DATE",
+          "is_pk": false,
+          "is_nullable": true
+        },
+        {
+          "name": "maintenance_schedule",
+          "type": "TEXT",
+          "is_pk": false,
+          "is_nullable": true
+        },
+        {
+          "name": "condition",
+          "type": "VARCHAR",
+          "is_pk": false,
+          "is_nullable": true
+        }
+      ],
+      "foreign_keys": [
+        {
+          "column": "farm_id",
+          "references_table": "farm",
+          "references_column": "id",
+          "is_nullable": false
+        }
+      ]
+    },
+    {
+      "name": "harvest",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "is_pk": true,
+          "is_nullable": false
+        },
+        {
+          "name": "field_id",
+          "type": "INTEGER",
+          "is_pk": false,
+          "is_nullable": false
+        },
+        {
+          "name": "crop_id",
+          "type": "INTEGER",
+          "is_pk": false,
+          "is_nullable": false
+        },
+        {
+          "name": "date",
+          "type": "DATE",
+          "is_pk": false,
+          "is_nullable": true
+        },
+        {
+          "name": "amount_harvested",
+          "type": "FLOAT",
+          "is_pk": false,
+          "is_nullable": true
+        }
+      ],
+      "foreign_keys": [
+        {
+          "column": "field_id",
+          "references_table": "field",
+          "references_column": "id",
+          "is_nullable": false
+        },
+        {
+          "column": "crop_id",
+          "references_table": "crop",
+          "references_column": "id",
+          "is_nullable": false
+        }
+      ]
+    },
+    {
+      "name": "treatment",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "is_pk": true,
+          "is_nullable": false
+        },
+        {
+          "name": "animal_id",
+          "type": "INTEGER",
+          "is_pk": false,
+          "is_nullable": false
+        },
+        {
+          "name": "date",
+          "type": "DATE",
+          "is_pk": false,
+          "is_nullable": true
+        },
+        {
+          "name": "type_of_treatment",
+          "type": "VARCHAR",
+          "is_pk": false,
+          "is_nullable": true
+        },
+        {
+          "name": "medication_used",
+          "type": "VARCHAR",
+          "is_pk": false,
+          "is_nullable": true
+        }
+      ],
+      "foreign_keys": [
+        {
+          "column": "animal_id",
+          "references_table": "animal",
+          "references_column": "id",
+          "is_nullable": false
+        }
+      ]
+    },
+    {
+      "name": "field_crop",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "is_pk": true,
+          "is_nullable": false
+        },
+        {
+          "name": "field_id",
+          "type": "INTEGER",
+          "is_pk": false,
+          "is_nullable": false
+        },
+        {
+          "name": "crop_id",
+          "type": "INTEGER",
           "is_pk": false,
           "is_nullable": false
         }
       ],
       "foreign_keys": [
         {
-          "column": "post_id",
-          "references_table": "posts",
+          "column": "field_id",
+          "references_table": "field",
           "references_column": "id",
           "is_nullable": false
         },
         {
-          "column": "user_id",
-          "references_table": "users",
+          "column": "crop_id",
+          "references_table": "crop",
           "references_column": "id",
           "is_nullable": false
         }

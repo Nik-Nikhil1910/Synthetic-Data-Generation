@@ -4,13 +4,19 @@
     "version": "0.1.0"
   },
   "execution_order": [
-    "users",
-    "posts",
-    "comments"
+    "animal",
+    "crop",
+    "farm",
+    "employee",
+    "equipment",
+    "field",
+    "field_crop",
+    "harvest",
+    "treatment"
   ],
   "tables": [
     {
-      "name": "users",
+      "name": "animal",
       "row_count": 50,
       "columns": [
         {
@@ -19,30 +25,37 @@
           "strategy": "sequential_integer"
         },
         {
-          "name": "username",
-          "generator_type": "faker",
-          "faker_provider": "user_name",
-          "is_nullable": false,
-          "null_probability": 0.0
-        },
-        {
-          "name": "password",
+          "name": "species",
           "generator_type": "faker",
           "faker_provider": "lexify",
-          "is_nullable": false,
-          "null_probability": 0.0
+          "is_nullable": true,
+          "null_probability": 0.2
         },
         {
-          "name": "email",
+          "name": "breed",
           "generator_type": "faker",
-          "faker_provider": "email",
-          "is_nullable": false,
-          "null_probability": 0.0
+          "faker_provider": "lexify",
+          "is_nullable": true,
+          "null_probability": 0.2
+        },
+        {
+          "name": "birthdate",
+          "generator_type": "faker",
+          "faker_provider": "date_of_birth",
+          "is_nullable": true,
+          "null_probability": 0.2
+        },
+        {
+          "name": "health_records",
+          "generator_type": "faker",
+          "faker_provider": "paragraph",
+          "is_nullable": true,
+          "null_probability": 0.2
         }
       ]
     },
     {
-      "name": "posts",
+      "name": "crop",
       "row_count": 50,
       "columns": [
         {
@@ -51,40 +64,223 @@
           "strategy": "sequential_integer"
         },
         {
-          "name": "user_id",
+          "name": "variety",
+          "generator_type": "faker",
+          "faker_provider": "lexify",
+          "is_nullable": true,
+          "null_probability": 0.2
+        },
+        {
+          "name": "planting_date",
+          "generator_type": "faker",
+          "faker_provider": "date_this_year",
+          "is_nullable": true,
+          "null_probability": 0.2
+        },
+        {
+          "name": "expected_yield",
+          "generator_type": "faker",
+          "faker_provider": "pyfloat",
+          "is_nullable": true,
+          "null_probability": 0.2
+        },
+        {
+          "name": "care_requirements",
+          "generator_type": "faker",
+          "faker_provider": "paragraph",
+          "is_nullable": true,
+          "null_probability": 0.2
+        }
+      ]
+    },
+    {
+      "name": "farm",
+      "row_count": 50,
+      "columns": [
+        {
+          "name": "id",
+          "generator_type": "primary_key",
+          "strategy": "sequential_integer"
+        },
+        {
+          "name": "name",
+          "generator_type": "faker",
+          "faker_provider": "name",
+          "is_nullable": true,
+          "null_probability": 0.2
+        },
+        {
+          "name": "location",
+          "generator_type": "faker",
+          "faker_provider": "lexify",
+          "is_nullable": true,
+          "null_probability": 0.2
+        },
+        {
+          "name": "size",
+          "generator_type": "faker",
+          "faker_provider": "pyfloat",
+          "is_nullable": true,
+          "null_probability": 0.2
+        },
+        {
+          "name": "contact_information",
+          "generator_type": "faker",
+          "faker_provider": "paragraph",
+          "is_nullable": true,
+          "null_probability": 0.2
+        }
+      ]
+    },
+    {
+      "name": "employee",
+      "row_count": 50,
+      "columns": [
+        {
+          "name": "id",
+          "generator_type": "primary_key",
+          "strategy": "sequential_integer"
+        },
+        {
+          "name": "farm_id",
           "generator_type": "foreign_key",
           "references": {
-            "table": "users",
+            "table": "farm",
             "column": "id"
           },
           "is_nullable": false,
           "null_probability": 0.0
         },
         {
-          "name": "title",
+          "name": "name",
           "generator_type": "faker",
-          "faker_provider": "sentence",
-          "is_nullable": false,
-          "null_probability": 0.0
+          "faker_provider": "name",
+          "is_nullable": true,
+          "null_probability": 0.2
         },
         {
-          "name": "content",
+          "name": "contact_information",
           "generator_type": "faker",
           "faker_provider": "paragraph",
-          "is_nullable": false,
-          "null_probability": 0.0
+          "is_nullable": true,
+          "null_probability": 0.2
         },
         {
-          "name": "publication_date",
+          "name": "job_title",
           "generator_type": "faker",
-          "faker_provider": "date_this_year",
-          "is_nullable": false,
-          "null_probability": 0.0
+          "faker_provider": "job",
+          "is_nullable": true,
+          "null_probability": 0.2
+        },
+        {
+          "name": "pay_rate",
+          "generator_type": "faker",
+          "faker_provider": "pyfloat",
+          "is_nullable": true,
+          "null_probability": 0.2
         }
       ]
     },
     {
-      "name": "comments",
+      "name": "equipment",
+      "row_count": 50,
+      "columns": [
+        {
+          "name": "id",
+          "generator_type": "primary_key",
+          "strategy": "sequential_integer"
+        },
+        {
+          "name": "farm_id",
+          "generator_type": "foreign_key",
+          "references": {
+            "table": "farm",
+            "column": "id"
+          },
+          "is_nullable": false,
+          "null_probability": 0.0
+        },
+        {
+          "name": "make",
+          "generator_type": "faker",
+          "faker_provider": "lexify",
+          "is_nullable": true,
+          "null_probability": 0.2
+        },
+        {
+          "name": "model",
+          "generator_type": "faker",
+          "faker_provider": "lexify",
+          "is_nullable": true,
+          "null_probability": 0.2
+        },
+        {
+          "name": "purchase_date",
+          "generator_type": "faker",
+          "faker_provider": "date_this_year",
+          "is_nullable": true,
+          "null_probability": 0.2
+        },
+        {
+          "name": "maintenance_schedule",
+          "generator_type": "faker",
+          "faker_provider": "paragraph",
+          "is_nullable": true,
+          "null_probability": 0.2
+        },
+        {
+          "name": "condition",
+          "generator_type": "faker",
+          "faker_provider": "lexify",
+          "is_nullable": true,
+          "null_probability": 0.2
+        }
+      ]
+    },
+    {
+      "name": "field",
+      "row_count": 50,
+      "columns": [
+        {
+          "name": "id",
+          "generator_type": "primary_key",
+          "strategy": "sequential_integer"
+        },
+        {
+          "name": "farm_id",
+          "generator_type": "foreign_key",
+          "references": {
+            "table": "farm",
+            "column": "id"
+          },
+          "is_nullable": false,
+          "null_probability": 0.0
+        },
+        {
+          "name": "size",
+          "generator_type": "faker",
+          "faker_provider": "pyfloat",
+          "is_nullable": true,
+          "null_probability": 0.2
+        },
+        {
+          "name": "location",
+          "generator_type": "faker",
+          "faker_provider": "lexify",
+          "is_nullable": true,
+          "null_probability": 0.2
+        },
+        {
+          "name": "soil_type",
+          "generator_type": "faker",
+          "faker_provider": "lexify",
+          "is_nullable": true,
+          "null_probability": 0.2
+        }
+      ]
+    },
+    {
+      "name": "field_crop",
       "row_count": 100,
       "columns": [
         {
@@ -93,38 +289,111 @@
           "strategy": "sequential_integer"
         },
         {
-          "name": "post_id",
+          "name": "field_id",
           "generator_type": "foreign_key",
           "references": {
-            "table": "posts",
+            "table": "field",
             "column": "id"
           },
           "is_nullable": false,
           "null_probability": 0.0
         },
         {
-          "name": "user_id",
+          "name": "crop_id",
           "generator_type": "foreign_key",
           "references": {
-            "table": "users",
+            "table": "crop",
+            "column": "id"
+          },
+          "is_nullable": false,
+          "null_probability": 0.0
+        }
+      ]
+    },
+    {
+      "name": "harvest",
+      "row_count": 100,
+      "columns": [
+        {
+          "name": "id",
+          "generator_type": "primary_key",
+          "strategy": "sequential_integer"
+        },
+        {
+          "name": "field_id",
+          "generator_type": "foreign_key",
+          "references": {
+            "table": "field",
             "column": "id"
           },
           "is_nullable": false,
           "null_probability": 0.0
         },
         {
-          "name": "text",
-          "generator_type": "faker",
-          "faker_provider": "paragraph",
+          "name": "crop_id",
+          "generator_type": "foreign_key",
+          "references": {
+            "table": "crop",
+            "column": "id"
+          },
           "is_nullable": false,
           "null_probability": 0.0
         },
         {
-          "name": "date_posted",
+          "name": "date",
           "generator_type": "faker",
           "faker_provider": "date_this_year",
+          "is_nullable": true,
+          "null_probability": 0.2
+        },
+        {
+          "name": "amount_harvested",
+          "generator_type": "faker",
+          "faker_provider": "pyfloat",
+          "is_nullable": true,
+          "null_probability": 0.2
+        }
+      ]
+    },
+    {
+      "name": "treatment",
+      "row_count": 50,
+      "columns": [
+        {
+          "name": "id",
+          "generator_type": "primary_key",
+          "strategy": "sequential_integer"
+        },
+        {
+          "name": "animal_id",
+          "generator_type": "foreign_key",
+          "references": {
+            "table": "animal",
+            "column": "id"
+          },
           "is_nullable": false,
           "null_probability": 0.0
+        },
+        {
+          "name": "date",
+          "generator_type": "faker",
+          "faker_provider": "date_this_year",
+          "is_nullable": true,
+          "null_probability": 0.2
+        },
+        {
+          "name": "type_of_treatment",
+          "generator_type": "faker",
+          "faker_provider": "lexify",
+          "is_nullable": true,
+          "null_probability": 0.2
+        },
+        {
+          "name": "medication_used",
+          "generator_type": "faker",
+          "faker_provider": "lexify",
+          "is_nullable": true,
+          "null_probability": 0.2
         }
       ]
     }

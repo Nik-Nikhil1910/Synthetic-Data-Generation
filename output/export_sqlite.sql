@@ -5,241 +5,664 @@
 -- DDL: CREATE TABLE STATEMENTS
 -- ============================================
 
-CREATE TABLE "users" (
+CREATE TABLE "animal" (
     "id" INTEGER NOT NULL,
-    "username" TEXT NOT NULL,
-    "password" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
+    "species" TEXT,
+    "breed" TEXT,
+    "birthdate" TEXT,
+    "health_records" TEXT,
     PRIMARY KEY ("id")
 );
 
-CREATE TABLE "posts" (
+CREATE TABLE "crop" (
     "id" INTEGER NOT NULL,
-    "user_id" INTEGER NOT NULL,
-    "title" TEXT NOT NULL,
-    "content" TEXT NOT NULL,
-    "publication_date" TEXT NOT NULL,
-    PRIMARY KEY ("id"),
-    FOREIGN KEY ("user_id") REFERENCES "users"("id")
+    "variety" TEXT,
+    "planting_date" TEXT,
+    "expected_yield" REAL,
+    "care_requirements" TEXT,
+    PRIMARY KEY ("id")
 );
 
-CREATE TABLE "comments" (
+CREATE TABLE "farm" (
     "id" INTEGER NOT NULL,
-    "post_id" INTEGER NOT NULL,
-    "user_id" INTEGER NOT NULL,
-    "text" TEXT NOT NULL,
-    "date_posted" TEXT NOT NULL,
+    "name" TEXT,
+    "location" TEXT,
+    "size" REAL,
+    "contact_information" TEXT,
+    PRIMARY KEY ("id")
+);
+
+CREATE TABLE "employee" (
+    "id" INTEGER NOT NULL,
+    "farm_id" INTEGER NOT NULL,
+    "name" TEXT,
+    "contact_information" TEXT,
+    "job_title" TEXT,
+    "pay_rate" REAL,
     PRIMARY KEY ("id"),
-    FOREIGN KEY ("post_id") REFERENCES "posts"("id"),
-    FOREIGN KEY ("user_id") REFERENCES "users"("id")
+    FOREIGN KEY ("farm_id") REFERENCES "farm"("id")
+);
+
+CREATE TABLE "equipment" (
+    "id" INTEGER NOT NULL,
+    "farm_id" INTEGER NOT NULL,
+    "make" TEXT,
+    "model" TEXT,
+    "purchase_date" TEXT,
+    "maintenance_schedule" TEXT,
+    "condition" TEXT,
+    PRIMARY KEY ("id"),
+    FOREIGN KEY ("farm_id") REFERENCES "farm"("id")
+);
+
+CREATE TABLE "field" (
+    "id" INTEGER NOT NULL,
+    "farm_id" INTEGER NOT NULL,
+    "size" REAL,
+    "location" TEXT,
+    "soil_type" TEXT,
+    PRIMARY KEY ("id"),
+    FOREIGN KEY ("farm_id") REFERENCES "farm"("id")
+);
+
+CREATE TABLE "field_crop" (
+    "id" INTEGER NOT NULL,
+    "field_id" INTEGER NOT NULL,
+    "crop_id" INTEGER NOT NULL,
+    PRIMARY KEY ("id"),
+    FOREIGN KEY ("field_id") REFERENCES "field"("id"),
+    FOREIGN KEY ("crop_id") REFERENCES "crop"("id")
+);
+
+CREATE TABLE "harvest" (
+    "id" INTEGER NOT NULL,
+    "field_id" INTEGER NOT NULL,
+    "crop_id" INTEGER NOT NULL,
+    "date" TEXT,
+    "amount_harvested" REAL,
+    PRIMARY KEY ("id"),
+    FOREIGN KEY ("field_id") REFERENCES "field"("id"),
+    FOREIGN KEY ("crop_id") REFERENCES "crop"("id")
+);
+
+CREATE TABLE "treatment" (
+    "id" INTEGER NOT NULL,
+    "animal_id" INTEGER NOT NULL,
+    "date" TEXT,
+    "type_of_treatment" TEXT,
+    "medication_used" TEXT,
+    PRIMARY KEY ("id"),
+    FOREIGN KEY ("animal_id") REFERENCES "animal"("id")
 );
 
 -- ============================================
 -- DML: INSERT STATEMENTS
 -- ============================================
 
--- users: 50 rows
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (1, 'achang', 'cqGF', 'thull@example.com');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (2, 'brandy38', 'isiW', 'montgomeryjohn@example.net');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (3, 'kyleblair', 'RvEJ', 'gomezleslie@example.net');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (4, 'tammywoods', 'HqdZ', 'davismary@example.net');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (5, 'salazarmaria', 'vpUu', 'leeashley@example.org');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (6, 'lindawest', 'fuGF', 'turnerkelly@example.org');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (7, 'lisa83', 'ZMJL', 'sean96@example.com');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (8, 'kellylopez', 'lcNQ', 'thomas12@example.org');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (9, 'kirbyrachael', 'IRzT', 'aimee33@example.net');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (10, 'criley', 'FQPS', 'christopher91@example.com');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (11, 'megan30', 'UrhT', 'nathanjackson@example.com');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (12, 'garciadustin', 'SocK', 'johnsoncynthia@example.net');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (13, 'myersmitchell', 'hcMb', 'susanlopez@example.org');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (14, 'zclark', 'dRbI', 'qoliver@example.org');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (15, 'charlesturner', 'BldG', 'gwilliams@example.net');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (16, 'wgonzalez', 'UEKk', 'tammybrown@example.net');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (17, 'meganpeterson', 'qhMC', 'alexandermaldonado@example.net');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (18, 'deborah64', 'jJSa', 'vharmon@example.net');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (19, 'stephensdennis', 'WEwN', 'emily99@example.org');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (20, 'paul61', 'aMmS', 'ernest37@example.com');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (21, 'sjohnson', 'KAXQ', 'martincaleb@example.net');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (22, 'seandyer', 'JMWa', 'simpsonlarry@example.com');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (23, 'lambnancy', 'ZAmJ', 'monroedavid@example.org');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (24, 'aherring', 'uana', 'bairdemma@example.net');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (25, 'leecharlene', 'mtrS', 'craignash@example.com');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (26, 'johnsonrobin', 'ZYhq', 'desireeroth@example.net');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (27, 'darin24', 'bccn', 'angela59@example.org');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (28, 'djoseph', 'OBxI', 'jaredmatthews@example.org');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (29, 'edwardcook', 'YxTf', 'kimberly00@example.com');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (30, 'edwardsilva', 'xzJi', 'danny30@example.com');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (31, 'melodychandler', 'tzvt', 'jrodriguez@example.com');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (32, 'zrogers', 'ZvhE', 'lyonsronald@example.com');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (33, 'jessica22', 'OKyZ', 'joneschristopher@example.net');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (34, 'brucesmith', 'zJHs', 'ymora@example.net');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (35, 'rodneyrichardson', 'qLXk', 'hlee@example.org');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (36, 'leachshannon', 'RmhF', 'pscott@example.org');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (37, 'cindygarcia', 'DyxI', 'danielcarlson@example.com');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (38, 'annelittle', 'BHFR', 'martha73@example.net');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (39, 'alecthornton', 'Vuuc', 'nancymorrison@example.org');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (40, 'taguilar', 'TZEe', 'blackruth@example.org');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (41, 'davidturner', 'WCvk', 'mistymurray@example.com');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (42, 'gsantana', 'cKfR', 'burgessrebecca@example.org');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (43, 'amanda96', 'EYyM', 'melissayates@example.net');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (44, 'yangkevin', 'Kqve', 'theath@example.com');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (45, 'dpatrick', 'kPip', 'jessica50@example.org');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (46, 'fbutler', 'MTfR', 'lisagomez@example.org');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (47, 'dhughes', 'gEXj', 'johnsonchristina@example.net');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (48, 'daniel85', 'myYX', 'drodriguez@example.net');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (49, 'vmendez', 'PhRT', 'kristina26@example.com');
-INSERT INTO "users" ("id", "username", "password", "email") VALUES (50, 'stonekristen', 'mcYz', 'mwatson@example.com');
+-- animal: 50 rows
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (1, 'yWAc', 'qGFz', '2016-10-02', 'Group through despite cause cause believe son. Work special total financial role together range.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (2, 'EJgw', 'BuNO', '1937-11-28', 'Kind miss artist truth trouble behavior style. Ability management test during foot that course nothing. Sound central myself before year.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (3, 'GFgt', 'JsTh', '1984-08-02', 'Data son natural explain before something first. Face country cost party prevent. Attorney quickly candidate change although bag record.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (4, 'IRzT', 'HrHZ', '1942-02-17', 'Stay information every manage political record word group. Party main picture suddenly drug rule.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (5, 'hTox', 'YkvB', '2021-02-15', 'Situation talk despite stage. Own available buy country store build before.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (6, 'hcMb', 'mlTh', '1975-04-21', 'View age international big. Attorney author feeling job article.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (7, 'DcMg', NULL, '2005-04-04', 'Employee toward like total now. Whom around put suddenly garden. Bring TV program actually race.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (8, 'KGtP', 'wyQq', '1930-12-17', 'Leader bad school. Exactly drive well good explain grow water. Car financial security stock ball organization recognize civil.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (9, 'oOCy', 'TRKA', '1914-05-17', NULL);
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (10, 'zSKA', 'XQTc', '1932-08-17', 'Else citizen month maintain. Page a although for study anyone state. Could yourself plan base rise would.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (11, NULL, 'zRAu', '1910-07-17', 'Response able state. Partner couple part cup few read consider.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (12, 'EzOf', 'brCZ', NULL, 'Card minute practice get the. Surface amount day employee fire.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (13, 'xKcV', 'SMPF', '2007-01-12', 'Head Mrs debate onto across character. Front happen behavior single along especially. Word face house nature.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (14, NULL, 'shEU', '1942-09-14', 'Conference mission audience idea foreign.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (15, NULL, 'AggJ', '1975-07-27', 'Subject wish gas look record interview. Friend reach choose coach north. Assume be seek article.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (16, 'agzJ', 'HsCF', '2017-05-14', 'Institution happy write end since. Court boy state table agree moment. Budget huge debate among way. Perhaps bit learn gun still.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (17, 'gMFj', 'KzOR', '1967-09-07', 'Quickly thousand street your play themselves myself. Act relationship section five focus. Chance either six success on responsibility southern.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (18, 'eZfH', 'ceoi', NULL, NULL);
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (19, 'ctaW', 'CvkZ', '1930-05-02', NULL);
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (20, 'PDxG', 'yHGc', '1988-03-08', 'Serious wrong section town deal movement out. Suddenly win parent do ten after those.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (21, 'VltG', 'Kqve', '1977-03-31', 'Significant his himself clearly very. Expert stop area along individual.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (22, 'FMTf', 'RSjZ', '1958-02-03', 'Partner hit another. Sing after our car food record power. Himself simply make thing particular.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (23, 'DNOv', 'PhRT', '1994-09-27', 'When hold family second. Million size country site.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (24, 'CxWm', 'DwYO', '1920-05-02', 'Main too war.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (25, 'QKKn', NULL, '1941-05-03', 'Single recognize information figure box international not type. Indeed between similar safe.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (26, 'bYCB', 'RAbF', '1954-03-30', 'Good building reality generation. Act window standard audience.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (27, NULL, 'jnan', '1999-10-09', 'Fall ready usually. Teacher cost both general where.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (28, 'ibnx', NULL, NULL, 'Which fast there network force or ball. Ok choose today watch source firm drug. Fact information animal car.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (29, NULL, 'bzeS', '1920-01-17', 'Federal indicate unit opportunity fear great. Know hard we around impact.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (30, 'AUuC', NULL, '1937-11-04', 'Weight before control board born. Read somebody land human should it easy law. Central leg PM low data ability recognize.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (31, 'NDan', 'thXO', '1951-01-25', 'Choose relationship likely question set discussion seven evidence. Building this American. Huge three report know second.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (32, NULL, NULL, '1958-03-27', NULL);
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (33, NULL, 'sWRm', '1991-02-11', 'Audience energy move. Morning eat turn clear.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (34, NULL, 'AssH', NULL, 'Mission decision black western myself scientist tough. Factor head pick church recent.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (35, 'yzLD', 'iJQt', '1958-04-08', NULL);
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (36, 'OEVA', NULL, NULL, 'Major maybe manage when know central many. Democratic green hospital year suffer without rather bank.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (37, NULL, 'VQza', '1959-04-02', 'Per yourself their record.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (38, 'UojW', NULL, '1988-01-17', 'Black leave form collection instead. Challenge value challenge firm decade cost.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (39, NULL, 'wYyB', '2019-11-22', 'Role somebody keep daughter report town. Doctor be cost. Sea quality do father.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (40, 'fTGW', 'sXwA', '1972-06-14', NULL);
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (41, 'dOSH', 'QPJV', '1968-09-07', 'Majority region democratic entire analysis clear about. Cell skill quite. However TV law fund bill third some follow. Throw eight miss couple bag thank generation.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (42, 'mqRU', 'VttH', '1962-06-08', 'Gas Republican and various authority leave right. True include management.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (43, 'Chff', NULL, '1942-11-25', 'Increase try key baby. Next though house where economic detail.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (44, NULL, 'rwuB', '1924-09-06', 'Particular smile represent since method. Movie end discussion budget situation between run. Design they young according movement.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (45, 'Bdhy', 'PrhV', '1986-12-06', 'Push region produce develop story. Ask film force health lose. Commercial special network foreign one agent candidate how.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (46, 'lGei', 'WnYX', '1977-09-07', 'Dog car do his part. Pick too blue street. Other majority final when new clear these.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (47, 'ZVEI', 'uTfq', NULL, NULL);
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (48, 'iMzT', 'muYs', '1962-05-10', 'Although risk which gas kid. Employee public figure ground much.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (49, 'UOjw', 'bFOd', '1913-06-04', 'Actually watch force. General professional career two.');
+INSERT INTO "animal" ("id", "species", "breed", "birthdate", "health_records") VALUES (50, 'CBjw', 'tlPv', '2009-03-03', NULL);
 
--- posts: 50 rows
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (1, 25, 'Smile away and various main too.', 'Occur democratic behavior standard thousand single recognize. Medical watch certainly through instead base. Indeed between similar safe.', '2026-01-02');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (2, 49, 'Issue indicate market ten foot education good.', 'Reality generation concern store discover hand. Throw debate daughter purpose voice but according hard.', '2026-01-02');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (3, 27, 'Do center law live religious election agreement decade.', 'Which fast there network force or ball. Ok choose today watch source firm drug. Fact information animal car.', '2026-01-01');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (4, 3, 'Back available inside nearly scientist central.', 'Pm be know hard we. Heavy across while top. Daughter fall likely wear someone everybody.', '2026-01-28');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (5, 17, 'Read somebody land human should it easy law.', 'Green place beat sense. Ability recognize peace account fear. Feeling participant interest seem begin marriage which myself.', '2026-01-20');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (6, 33, 'Place again establish protect a.', 'Three report know second government the pull. Other along society figure future. Teacher three seven attention team executive care.', '2026-01-26');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (7, 32, 'Decision black western myself scientist tough everything kind.', 'Case but building husband life nice federal place. Design major maybe manage when know. Seat appear perform agent.', '2026-01-23');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (8, 26, 'Thousand act money at term rather.', 'Guess break about. Their record road dinner seem. Course its respond himself former.', '2026-01-22');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (9, 20, 'Language remember model can.', 'Glass work interview man role somebody. Vote only anyone home doctor be.', '2026-01-10');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (10, 31, 'Arm point community particularly partner relate.', 'Sign third in approach recent. Upon value ok majority region democratic entire. Apply glass face.', '2026-01-01');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (11, 23, 'As into develop part.', 'Law fund bill third some. Movie throw eight miss couple bag. Generation study economy rock feeling might his.', '2026-01-24');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (12, 38, 'The drive figure necessary across manager.', 'True include management. Brother bank better she increase try. Partner stand next though house where.', '2026-01-13');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (13, 14, 'Detail subject everything goal yes blue tonight.', 'Smile represent since method left plant evening. Budget situation between. Eat expect save process score middle. Business population brother.', '2026-01-28');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (14, 33, 'Director respond national example science top.', 'Film force health lose old case administration. Foreign one agent candidate how wish member.', '2026-01-04');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (15, 9, 'Share sit simple notice.', 'Run staff service government opportunity. Material truth pattern ago other majority final when.', '2026-01-27');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (16, 19, 'Produce manager well lose.', 'Else page region start. Himself arrive although risk which. Television protect process difficult general class.', '2026-01-01');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (17, 9, 'Of around piece government make article.', 'Actually watch force. General professional career two.', '2026-01-22');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (18, 49, 'Center find power road size impact.', 'Through move source wonder relate service.', '2026-01-28');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (19, 7, 'Important hope about catch.', 'Bag down stock computer. What to sea. Collection bad until our per leader change.', '2026-01-02');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (20, 40, 'Future scene heavy personal threat.', 'Group public leader medical. Save identify establish manage. Address morning explain light alone mother.', '2026-01-27');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (21, 17, 'Various although house build get.', 'Event yet effect.', '2026-01-15');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (22, 35, 'Several might history strong economy.', 'Word source wall drug purpose mouth then. Trouble tonight former section.', '2026-01-01');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (23, 46, 'Staff north weight guy personal follow situation over.', 'Small notice kind. Upon we lose water stand single.', '2026-01-10');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (24, 39, 'Nature interest wear community.', 'Probably church body mean. Painting senior entire expect investment yard responsibility.', '2026-01-13');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (25, 10, 'Money fish garden relationship it center accept.', 'Six reduce sit his. We no in pass sound direction administration. Word citizen create great record affect same.', '2026-01-28');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (26, 20, 'Ever war unit back large.', 'Time special beyond could key assume interview. Wait education think similar particular before. Manage several dark.', '2026-01-20');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (27, 7, 'Itself play pull recent state old.', 'Camera report foreign agency list miss among. Ten guess attorney response provide likely fire. Fire town worker.', '2026-01-14');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (28, 47, 'Provide other identify fill art by.', 'Relate respond rich role mind statement reality. Hold conference son spend ball company enter son.', '2026-01-16');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (29, 5, 'Site military lead travel series.', 'Check plan computer mention time firm water. Possible lead draw learn city. Tree care sign arm bar military.', '2026-01-01');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (30, 44, 'Billion parent now from.', 'Gun subject PM carry understand consumer by. Though cover including artist find hope. Over some collection.', '2026-01-04');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (31, 22, 'Approach great top series public none.', 'Congress law enough we ask benefit. Go computer pattern. Follow so second.', '2026-01-25');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (32, 31, 'Ball appear television so teach energy possible.', 'Four western likely almost. Personal expert already heavy church nature chair.', '2026-01-09');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (33, 36, 'Policy drug these person.', 'When personal huge difficult player forget whom.', '2026-01-18');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (34, 7, 'Clear inside guy north hit.', 'Us accept hope soon.', '2026-01-08');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (35, 23, 'Agent follow about.', 'Of challenge check skin.', '2026-01-02');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (36, 28, 'Job trial four easy case member.', 'Authority imagine probably whom it job. High trouble drive loss turn attorney education. Those head against particularly listen.', '2026-01-12');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (37, 21, 'American focus something who blood.', 'Require agree inside thank.', '2026-01-20');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (38, 40, 'Under require page claim future in.', 'Seven both happy central group. Picture send cultural whatever computer on fast. Fact issue radio. Heart decade care book ground.', '2026-01-02');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (39, 41, 'Office less politics religious back international.', 'College debate direction moment. Ground think save respond friend budget while. Significant energy citizen physical why mouth.', '2026-01-08');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (40, 14, 'Worker season figure they yeah get.', 'Fill improve image best win challenge on. Blood single recently other owner message entire. Collection be along break gun reveal five put.', '2026-01-18');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (41, 36, 'Recent project speech director city necessary thus sister.', 'Ago poor coach year. Part decade remain if again care. Commercial kid approach heart sort popular.', '2026-01-20');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (42, 31, 'Do them although per environmental medical.', 'Line Congress must city system story. Lead while long not. News enter director book cell speech.', '2026-01-07');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (43, 29, 'Statement carry next according.', 'Record own research blood list girl sister. Rate drop marriage worker. Different many water meeting future.', '2026-01-04');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (44, 34, 'Off difficult happen high serve.', 'Very score loss they grow. Partner story budget great than director.', '2026-01-19');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (45, 17, 'Trouble it grow husband short year term look.', 'Land general during cost. Material body himself home message woman.', '2026-01-28');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (46, 4, 'Determine human find discussion military ability line hour.', 'Worker offer American behavior customer force. Congress recognize agreement well.', '2026-01-01');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (47, 36, 'Movement can start paper tree bank.', 'Summer minute perform indeed Mr. Dinner indeed listen a decision. Past especially old.', '2026-01-18');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (48, 1, 'Quality political other begin war resource.', 'Realize per probably. Debate wish floor inside matter nice.', '2026-01-24');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (49, 6, 'Meeting language condition natural.', 'Effort bad measure star tell law. Lose various agency rich accept if.', '2026-01-22');
-INSERT INTO "posts" ("id", "user_id", "title", "content", "publication_date") VALUES (50, 47, 'Involve education little direction exist.', 'Use chance story range could usually piece but. Choice already thank source. Hope could many cold another way sign.', '2026-01-17');
+-- crop: 50 rows
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (1, 'YVAy', '2026-01-01', NULL, 'Move source wonder relate service. Tv important hope about catch than method. Bag down stock computer.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (2, 'bZkV', '2026-01-28', 660843703495.106, 'Leader change own education south run agree usually. Many group public. Door green save identify establish manage hotel. Morning explain light alone mother.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (3, 'JqRc', '2026-01-23', 54194274.5814795, 'Again science alone. Reflect upon yet seven several might history strong. Decade not forget why under.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (4, 'LRUI', '2026-01-18', NULL, 'Former section across staff. Choose general fact fall manager idea issue.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (5, 'kaYj', NULL, 57919.4835479689, 'Travel professional production election partner audience very.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (6, 'rlHk', '2026-01-04', 9497.88063679579, 'His itself find add sing standard exactly election. Never wrong couple site social suddenly seek. Six reduce sit his.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (7, 'DcJA', NULL, 257.70275210211, 'Piece physical market room eat. Ever war unit back large.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (8, NULL, NULL, -884.985733215455, 'Clearly type up play wait. Join serious green foreign film.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (9, 'FaWq', '2026-01-10', NULL, 'Itself play pull recent state old. Stop camera report foreign agency list. Career bank ten guess attorney response provide.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (10, 'Ecub', NULL, -972023461.131355, 'Provide other identify fill art by. Treat relate respond rich.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (11, 'UHcJ', '2026-01-19', NULL, 'Son spend ball company enter son. Red effect else very your choice.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (12, 'CJjc', '2026-01-29', 832776848568.323, 'Possible lead draw learn city. Tree care sign arm bar military.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (13, NULL, NULL, 60194413249863.9, 'Later street mention would technology budget first. Consumer by full. Cover including artist find hope appear should represent.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (14, 'weAd', '2026-01-22', -721895610.324788, NULL);
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (15, 'KZDA', '2026-01-09', -37176388247052.3, 'Group but go computer. Real to follow so second reason live teach. Television so teach energy possible believe step.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (16, 'vwgE', '2026-01-02', -42777146655.0, 'Church nature chair company TV policy. Wall various foreign agency when. Question analysis drive example color draw difficult there.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (17, 'DxKi', '2026-01-19', NULL, NULL);
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (18, 'KXak', '2026-01-29', -2745123531801.0, 'About another understand of challenge check skin. Industry nothing rather. Two hair describe hundred candidate.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (19, 'KQwg', NULL, NULL, 'Early high trouble drive loss turn. Structure your those head. Page single theory.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (20, 'rcNu', '2026-01-19', 8756.17389110009, 'Should room with. Under require page claim future in. Truth ten seven both happy central group line.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (21, 'HWdm', '2026-01-13', NULL, NULL);
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (22, 'lULu', NULL, -2724826157.38156, 'Alone improve heart decade care book. Close issue huge away represent race. Nation network college debate direction moment.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (23, 'FwNV', NULL, -2938584896.53591, 'Garden maybe forward reason. Worker season figure they yeah get.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (24, 'EGtA', '2026-01-20', 2.692123870328, 'Plant wonder thing blood single recently other owner. Book read pass heart soldier action throughout. Five put hard recent project speech director. No still back task.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (25, 'kbPk', '2026-01-26', 58812253.6795062, 'Onto try commercial. North trouble upon beautiful open free.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (26, 'GDcE', '2026-01-05', -5987574479.34774, 'Must city system story century. While long not improve.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (27, 'fqEo', '2026-01-06', NULL, NULL);
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (28, 'sjxZ', NULL, NULL, 'Probably arm program only. According television next sense make.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (29, 'SgEJ', '2026-01-17', -1.724499732137, 'Marriage worker ever across great. Unit begin fight institution school white team.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (30, 'josm', '2026-01-24', -4635.83255105807, 'Husband matter likely prevent. Place grow everyone win should research.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (31, 'sgEs', '2026-01-06', 5771623.32686318, 'Material body himself home message woman. Stock determine human find discussion military ability.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (32, NULL, '2026-01-23', -956680936.995935, 'Worker offer American behavior customer force. Congress recognize agreement well.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (33, 'ayIa', '2026-01-07', NULL, 'Paper tree bank letter summer minute perform indeed. Computer doctor up high southern job high.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (34, 'WcNr', NULL, -51718724236119.5, 'Other begin war resource. Agency center sign career debate. Cut meet build black treat buy.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (35, NULL, NULL, -2997686.61055995, 'Can effort bad measure star tell. Eat lose various agency rich accept if. Difference drop local cell kid growth main.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (36, NULL, '2026-01-08', 3.88792082865304, NULL);
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (37, 'Rhdj', '2026-01-17', -87509400463519.2, 'Question in court hospital skin soon. Thought radio minute rich consumer type. Old charge read management production up our allow.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (38, 'FMuJ', '2026-01-10', 18880943658282.3, 'Difference range technology serious international position write those. Management court head successful response hospital. Suffer life chair senior seem west.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (39, 'zDTI', '2026-01-11', 22847213.425866, 'Take one them in. Plant whether protect most trade.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (40, 'tyII', '2026-01-04', -269519020185.26, 'Serious fine seat should dream whose agreement tell. Happen letter body language there wonder him. Until direction opportunity very analysis firm once.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (41, NULL, NULL, 8846861.64349432, 'History the bring parent very card. Those budget involve all. Enough break factor pattern PM.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (42, 'VIId', '2026-01-17', 169264.974996953, 'Pm election case. Party individual so attack. Bit avoid yourself campaign alone subject development.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (43, NULL, NULL, 3118127167737.88, NULL);
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (44, 'Qozm', NULL, NULL, 'Give especially win give yourself system. Letter finish campaign night simply. Bar standard final. Along particularly factor boy Republican without.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (45, 'GJwC', NULL, NULL, 'Me story but order leg food. Drop join recognize all structure.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (46, 'OreQ', '2026-01-16', -52004498.821326, 'Cause others skill industry old effect fine. Majority large but hear minute discuss space.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (47, 'ybpf', '2026-01-15', 2267331031678.56, 'Moment buy east example identify likely.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (48, 'dkTH', '2026-01-18', 30713957050.4928, 'Necessary economy agree discussion. Understand relate church serve can street.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (49, 'RkVp', '2026-01-26', -90.372553987489, 'Artist cold measure defense mouth. Billion talk mouth tonight throw action section. Second late every include generation.');
+INSERT INTO "crop" ("id", "variety", "planting_date", "expected_yield", "care_requirements") VALUES (50, 'zqUe', '2026-01-08', 97094.3668763555, 'Really eat report to. Outside they eye out. Project happen white maybe read card.');
 
--- comments: 100 rows
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (1, 26, 46, 'Rich consumer type Republican organization. Charge read management production up our. Drug toward such.', '2026-01-27');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (2, 43, 41, 'Analysis care kitchen. Difference range technology serious international position write those.', '2026-01-17');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (3, 1, 40, 'Clear newspaper ground just keep. Suffer life chair senior seem west. Week remain decide happy another image.', '2026-01-05');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (4, 32, 22, 'Now so must plant whether protect most trade. Herself Mr bad wide manage. Daughter pay growth.', '2026-01-05');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (5, 16, 47, 'Pass tend onto when happen.', '2026-01-23');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (6, 21, 46, 'Order everything stuff detail. Second until direction opportunity very analysis.', '2026-01-16');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (7, 5, 13, 'Nor as year look floor role agency its. Seven those budget involve. Picture enough break. Health sort couple station my.', '2026-01-17');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (8, 37, 15, 'Add traditional standard PM election case yet. Party individual so attack. Bit avoid yourself campaign alone subject development.', '2026-01-05');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (9, 16, 10, 'Yet really which human participant. Give especially win give yourself system. Letter finish campaign night simply.', '2026-01-01');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (10, 35, 29, 'Final relationship wear along particularly factor. Coach every cut never.', '2026-01-22');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (11, 6, 6, 'Me story but order leg food. Drop join recognize all structure.', '2026-01-14');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (12, 21, 33, 'First natural without any remain support. Cause others skill industry old effect fine.', '2026-01-26');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (13, 32, 7, 'Remain interest college anything relationship local air. Final station tough whether. Throw gun including.', '2026-01-26');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (14, 20, 36, 'Example identify likely view around remember take. Dark character sometimes small control work.', '2026-01-27');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (15, 19, 46, 'Discussion star individual third.', '2026-01-08');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (16, 8, 36, 'Can street race seat model similar sometimes. Reveal so suggest.', '2026-01-04');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (17, 22, 35, 'Herself hold his moment. Camera beat activity stay. Action section drug how.', '2026-01-14');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (18, 14, 39, 'Product election baby seven only scientist. Seven approach speak. Eat report to product outside they eye.', '2026-01-08');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (19, 36, 38, 'Happen white maybe read card look. Part fund feeling cause stand. Give point herself official receive may.', '2026-01-28');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (20, 19, 29, 'Issue enter cold cell our. Sing media step live game item lay.', '2026-01-26');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (21, 6, 39, 'Why learn attention cut billion.', '2026-01-13');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (22, 25, 21, 'Vote continue community whole growth.', '2026-01-13');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (23, 37, 16, 'Again trouble cold.', '2026-01-16');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (24, 19, 12, 'Statement scene teach because it boy. Should add mother.', '2026-01-18');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (25, 13, 12, 'Culture continue condition probably particularly measure. Physical treat dinner able job page position possible.', '2026-01-07');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (26, 3, 40, 'Information forward trouble unit. Country article will firm woman section magazine loss. Especially position learn senior today mention.', '2026-01-28');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (27, 43, 17, 'Language provide parent information call prevent visit skin. Significant stuff section lot rather beyond share energy. Play meeting movie avoid.', '2026-01-02');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (28, 31, 5, 'Wind well thousand. His within though finish star be. Popular see different decide trip total. Out human night.', '2026-01-15');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (29, 6, 44, 'Throughout western world area student there. Night top popular open. Store office explain education.', '2026-01-20');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (30, 49, 9, 'Model sing then.', '2026-01-14');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (31, 10, 3, 'Strategy medical voice boy. According star study form seem beat.', '2026-01-11');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (32, 6, 45, 'Forward magazine movie base firm himself idea. Necessary million trade century hundred themselves finish.', '2026-01-04');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (33, 35, 44, 'Alone popular break attention. North good program risk I.', '2026-01-16');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (34, 26, 46, 'Mention discussion maybe rise sit hand society. Economic baby book. Short during agency meet window now. Wall conference especially.', '2026-01-24');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (35, 34, 18, 'Specific show pressure. Sea thought raise suggest six claim analysis. Moment young close history explain these low.', '2026-01-02');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (36, 34, 16, 'Outside wish community kid official within nothing tend. Century involve down herself drive effort drop onto. Walk draw front plan focus century.', '2026-01-13');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (37, 14, 44, 'Movie report boy two. Daughter consider group eat soon must toward. Hope memory government image room.', '2026-01-03');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (38, 38, 27, 'Page clear newspaper ball may. Information fire purpose very them history tell.', '2026-01-06');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (39, 38, 18, 'Work several past next final tonight. Heart watch bed bag wind physical media.', '2026-01-01');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (40, 29, 32, 'Former run others believe nor after small. Before open hot campaign throughout. Most ten cup far training opportunity difficult candidate. Election small certainly pattern daughter.', '2026-01-07');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (41, 43, 42, 'Current open goal probably. Sense scientist bank result. System term social say about century debate officer.', '2026-01-01');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (42, 45, 23, 'Certainly Mrs me wear. Lead professional kind wait. Push country glass evening much.', '2026-01-14');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (43, 6, 21, 'Need assume heart west training. Might catch that trip.', '2026-01-07');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (44, 40, 8, 'To movie seven concern attention. Wind heavy anything strategy hope return. Call report must charge alone pattern might.', '2026-01-28');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (45, 32, 38, 'Light hot because movement business. See collection cut drive out image thought. Defense cup man course teacher message page.', '2026-01-27');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (46, 41, 22, 'Police it house political energy song policy. Small go woman small reduce alone culture democratic. Stay century law before everybody.', '2026-01-15');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (47, 13, 16, 'Scene view today father provide pass. Have perform because technology important they tax. Executive military plan school certainly meet floor.', '2026-01-04');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (48, 2, 47, 'Customer far recently prepare scene. Along kid explain product money store. Glass one then investment scientist bring citizen.', '2026-01-22');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (49, 18, 8, 'View stuff federal like be happen. Big early amount team. Beat start say either none heavy down business.', '2026-01-26');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (50, 46, 15, 'Practice physical actually century over short certain. Summer specific option concern.', '2026-01-06');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (51, 24, 11, 'Especially life sister official. Remain center without.', '2026-01-03');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (52, 22, 28, 'Effect imagine town worker present defense. Or century their defense. Wind action economy official natural can.', '2026-01-17');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (53, 4, 7, 'Write under fear knowledge player down positive. Be certain ago whom language. Since experience perform interest particularly notice military civil.', '2026-01-01');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (54, 10, 45, 'Style remain cup they. Middle car market wear commercial.', '2026-01-01');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (55, 15, 3, 'Energy religious sport price job follow. Form single camera political economic.', '2026-01-23');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (56, 37, 41, 'Reach government support improve. Black because song capital administration sound teach hit. Down PM benefit arm subject over feeling.', '2026-01-26');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (57, 35, 39, 'Protect front why ability fund front suggest. Hear prove leave national visit.', '2026-01-20');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (58, 44, 5, 'Above form debate name.', '2026-01-25');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (59, 2, 8, 'Bill pattern scientist early. Range know close election.', '2026-01-09');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (60, 41, 13, 'Agree her whether beyond bar shoulder decade. Director population measure student cost policy. Open wife owner.', '2026-01-14');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (61, 39, 37, 'Finish pick shake level season tough general. Cost develop left poor. Listen small reflect put again big.', '2026-01-26');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (62, 8, 26, 'Staff week own necessary allow. Throughout society theory happy culture daughter.', '2026-01-24');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (63, 6, 24, 'Rest really wait if. Debate into name response garden.', '2026-01-01');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (64, 8, 3, 'Far share thought soon large message exist word. Get poor herself population.', '2026-01-12');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (65, 39, 2, 'Will network physical play pull child push. Truth house try thus should wide.', '2026-01-15');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (66, 13, 12, 'Hard industry trial position college also keep. Financial race wrong discuss agency fund. Start market attorney between.', '2026-01-02');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (67, 46, 8, 'Act minute treatment quickly. Conference however find most city citizen.', '2026-01-06');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (68, 31, 14, 'Spring executive something few allow star forward. Attack she represent family us lawyer finally.', '2026-01-10');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (69, 47, 4, 'Interest amount understand hard. Final ability person choose order. Like ball cause way.', '2026-01-28');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (70, 44, 2, 'Baby assume since break. Various item boy response.', '2026-01-22');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (71, 35, 28, 'Music catch head sure. Candidate phone when room network behind social. To more food recognize national training.', '2026-01-12');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (72, 40, 7, 'Check if since hair. Wall measure again ability election. Present carry break majority low.', '2026-01-07');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (73, 17, 5, 'Stage the common prevent spend. Customer plan maybe manager place fly.', '2026-01-06');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (74, 15, 5, 'Good human billion ever up. Newspaper allow forward hour whom inside. Sing city energy season environment. Yet possible account question.', '2026-01-12');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (75, 42, 20, 'Hard week model box market. Particular available expect really amount accept sometimes.', '2026-01-08');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (76, 23, 28, 'Three doctor nature cup. Poor send through. Then probably or which white get bring.', '2026-01-01');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (77, 12, 4, 'Control thank direction quite television south. Top his outside project us pass management serious. Child investment yourself still.', '2026-01-11');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (78, 33, 30, 'Red citizen notice feeling. Better child computer either.', '2026-01-21');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (79, 3, 39, 'Rock make build painting either return heart. Age visit message maybe instead room seven. Whole increase beat.', '2026-01-14');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (80, 7, 45, 'Manage special way.', '2026-01-17');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (81, 26, 13, 'Model new run tonight official south senior. Green film at best small law campaign value. Suffer team word major western education.', '2026-01-17');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (82, 17, 23, 'Simple guess member hour movement. Benefit thus mean certainly value create agree likely. Model cause letter career election few turn.', '2026-01-23');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (83, 47, 31, 'Form think person. Fill final oil Congress. Price little identify.', '2026-01-11');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (84, 37, 11, 'Talk want it manage heavy investment. Seven physical court author carry.', '2026-01-16');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (85, 45, 44, 'Son last early leave camera. Sound market best only know fish. Produce clear various production.', '2026-01-06');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (86, 14, 50, 'Focus foreign four seven ability probably. Police college newspaper little drive.', '2026-01-26');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (87, 4, 44, 'Anything season hospital machine. Religious around both place.', '2026-01-20');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (88, 11, 11, 'Example office between table. Suddenly idea common laugh environment. Phone positive idea throughout concern class. Deep minute top group.', '2026-01-23');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (89, 22, 34, 'Might someone young learn argue glass. Difficult discuss call share its guess different.', '2026-01-16');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (90, 17, 8, 'Door natural produce team operation. Top worry there similar adult range true.', '2026-01-14');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (91, 39, 29, 'Nature street find community any morning more. None say heart information part full your yeah.', '2026-01-08');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (92, 43, 12, 'Wish loss cause. No affect catch that. Fly find create artist.', '2026-01-03');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (93, 1, 31, 'Thus growth him power. People worker time decide rest others development.', '2026-01-01');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (94, 44, 27, 'Increase simple as. Use through first exactly. Since laugh model make speak.', '2026-01-26');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (95, 37, 33, 'Social forward provide upon yeah sense. Degree training level.', '2026-01-15');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (96, 20, 42, 'School still up radio try condition. Week color wait cover thank. Me media onto continue machine.', '2026-01-24');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (97, 23, 25, 'Why break voice middle reflect yes. Third option chair decide.', '2026-01-18');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (98, 43, 17, 'Benefit major friend through. Parent shake now owner believe. Style believe tough wait candidate under.', '2026-01-13');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (99, 10, 36, 'College would from beyond bed activity. Gas this sort unit operation.', '2026-01-16');
-INSERT INTO "comments" ("id", "post_id", "user_id", "text", "date_posted") VALUES (100, 45, 1, 'Part father himself research general college bed. Want according speech personal task.', '2026-01-28');
+-- farm: 50 rows
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (1, 'Nicholas Bass', 'mMzv', NULL, NULL);
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (2, 'Jeremiah Alvarez', 'sZSv', NULL, 'Herself official receive may push serious successful country. Enter cold cell our series. Sing media step live game item lay.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (3, 'Amy Blair', 'qDSe', 14528144305088.4, 'Vote continue community whole growth.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (4, NULL, 'ZraR', NULL, 'Parent up story.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (5, 'Rodney Long', NULL, NULL, 'Teach because it boy agent common. Mother good decade TV culture continue condition probably. Option imagine physical treat dinner able job page.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (6, 'Mariah Taylor', 'fAtv', 1007.43543129057, 'With participant form time back sound city. Mention next identify language.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (7, NULL, 'QkMA', 87.1979067490206, 'Stuff section lot rather. Range international everybody book. Meeting movie avoid American address simply. Thousand impact six loss.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (8, 'Mark Taylor', NULL, -659.822826423443, NULL);
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (9, NULL, 'odnA', 18646168415019.8, NULL);
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (10, 'Elizabeth Sullivan', 'IdVC', 587797.968436513, 'Open collection become light environmental. Idea across player appear similar.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (11, 'Adam Mitchell', 'XjWG', 369166486255.6, 'Form seem beat debate. Forward magazine movie base firm himself idea. Necessary million trade century hundred themselves finish.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (12, 'Briana Johnson', 'PKhQ', NULL, 'Environment few voice thank local option five. Level generation since also himself with garden mention.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (13, 'Billy Rodriguez', 'BXNp', NULL, 'Million born American. Always hand game magazine series think. Ability possible door pressure sea thought.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (14, 'Sarah Mueller', 'kcWV', 6463756.93327402, 'Low trial religious your outside wish community kid. Foreign involve show ten century involve down herself.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (15, 'David Allen', 'LxDp', -81786.2719315081, NULL);
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (16, 'Charles Wolf', 'JlIT', 915.493585840793, 'Reality outside painting report become. Toward family event dark such firm again. What page clear newspaper ball.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (17, 'Melissa Barnes', NULL, NULL, 'Approach trip throughout free civil entire. Just nature increase trouble heart watch bed. Yet so before wrong.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (18, 'Lauren Rivera', 'UMgK', 9930347579.9635, 'Sign office until particularly. Everyone city contain week carry. Election small certainly pattern daughter.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (19, 'Ryan Russell', 'lmLb', NULL, 'Probably question sense scientist bank result peace. Social say about century debate. Push industry certainly Mrs me wear prove.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (20, 'Matthew Ramos', 'POUr', 1644.65926892124, 'Much why design need assume heart. Training believe system resource truth leave institution to.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (21, 'Pam Thompson', NULL, -6615654311474.65, 'Strategy hope return near sign Republican.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (22, 'Mary Torres', 'CHWK', 62909438.3413268, NULL);
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (23, 'Brandon Nichols', 'hGRD', NULL, 'Cut drive out. Attorney stock defense cup man course.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (24, 'Kayla Munoz', NULL, -629939.42401805, 'Policy owner ahead generation shoulder day popular. Key military deep according door.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (25, 'Larry Huff', NULL, NULL, 'Forget result professor research theory become. Step have perform because.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (26, NULL, 'iApb', NULL, 'Century suddenly have quality break. Floor right growth specific court yes. Recently prepare scene house central baby picture.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (27, 'Cole Guzman', NULL, 628574511.155822, 'Enter deep walk cause trouble movie. Stuff federal like be. Positive better management minute air represent.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (28, 'Angelica Underwood', 'VLqS', -170366.255109814, NULL);
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (29, NULL, 'OhRL', NULL, 'West practice physical actually. Religious push the ten. Summer specific option concern.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (30, 'Brandon Dean', NULL, NULL, 'Official yeah remain center without. Get effect imagine town. Present defense become result easy.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (31, 'Jodi Dickson', NULL, -81378552813085.8, 'Represent resource pretty write. Fear knowledge player down positive. Be certain ago whom language.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (32, 'Patricia Dixon', 'XBDN', 2.1060158800902, 'Style remain cup they. Middle car market wear commercial.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (33, 'Gerald Erickson', NULL, 0.43647330598419, NULL);
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (34, 'Nathan Lee', NULL, 86029880.2079126, 'Seven treatment kid reach government support. Half black because song capital administration.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (35, 'Shannon Hughes', 'EpzO', 431.738980426729, 'Color everything buy protect front why ability fund. Laugh cup hear prove leave national.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (36, 'Jennifer Garcia', 'gvUn', NULL, NULL);
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (37, NULL, NULL, NULL, 'Boy sing threat bill pattern scientist early. Range know close election.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (38, 'Carol Bush', 'KbJy', NULL, 'Beyond bar shoulder decade.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (39, 'Crystal Brewer', NULL, -195635.456836633, 'Inside water do get finish pick shake level.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (40, 'Stephanie Cooper', NULL, 23.3912195696089, 'Poor head perform walk expert easy. Learn military top cup. Week own necessary allow including level.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (41, 'Jessica Smith', 'KneF', 570024148762.71, 'Party debate into name response garden. Culture far share. Large message exist word beat her.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (42, 'Richard Dominguez', 'OXos', -9291131.88444, 'Play pull child push it why. Return few natural fight stand one significant get. Keep kid assume dinner former heavy. Fund consumer through theory simply concern page director.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (43, 'Alexandra Meyer DVM', 'RBRB', -482740802239.318, 'City citizen to. List run safe figure. Allow star forward leave art practice.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (44, 'Colleen Fitzpatrick', 'OtJn', 56901478.678497, 'Hard far around almost.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (45, 'Shaun Parrish', 'EPfL', NULL, 'Way night somebody. Remember parent produce cut.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (46, 'John Miller', 'ETCG', 552.150761389969, NULL);
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (47, 'Monica Henderson', 'ifOG', NULL, 'Easy role yes to more food recognize.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (48, 'Susan Allen', 'SfjM', -98675270.4758426, NULL);
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (49, 'Kathy Smith', 'ajqV', 2242.13684689633, 'Project every end catch American true goal. Customer plan maybe manager place fly. Pay real good human.');
+INSERT INTO "farm" ("id", "name", "location", "size", "contact_information") VALUES (50, 'Donald Mcfarland', 'yJwc', -3794.5987527791, 'Establish son turn another wonder reveal yet. Account question dinner write usually team. Effect unit state plant.');
+
+-- employee: 50 rows
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (1, 8, 'Curtis Bradley', 'Impact spend question election. Sometimes city commercial. Doctor nature cup whom poor send. Law national last people friend.', NULL, -5.2352748649559);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (2, 38, 'Cody Booth', 'Top his outside project us pass management serious. Child investment yourself still.', 'Engineer, site', 2441827837.39427);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (3, 49, 'Nicole Garcia', NULL, NULL, NULL);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (4, 17, 'Christopher Scott', 'Mrs interesting less economy fire education. Heart message matter position water. Instead room seven reveal whole.', 'Patent examiner', 998368.857206777);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (5, 49, NULL, 'Ahead quickly hope. Glass line knowledge season region little continue.', 'Theatre manager', 77.3699494763154);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (6, 37, 'Austin Davis', 'Pick work market suffer team word major. Man remember rich yeah simple. Two enough spend practice organization fill. Mean certainly value create.', NULL, -10975663815189.9);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (7, 35, 'Brenda Owens', 'Election few turn think tree amount billion. Person body price you.', 'Medical secretary', 831751118887.486);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (8, 24, 'Mark Davis', NULL, NULL, NULL);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (9, 26, 'Terri Reynolds', NULL, 'Research officer, government', 57608105.3450852);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (10, 31, 'Lori Lee', 'Let guy son last. Class wish relate sound market.', 'Chief Strategy Officer', -764591.341503291);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (11, 32, 'Matthew Martin', NULL, 'Market researcher', 1842.44576782991);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (12, 4, 'Emily Chase', 'Probably few cost summer city.', 'Financial adviser', -893807469573.48);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (13, 1, 'Jeanne Washington', 'Around both place strong. Throughout example office between table tonight suddenly idea.', 'Drilling engineer', NULL);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (14, 48, 'Michele Gallagher', 'Positive idea throughout concern. Stay beat PM stage. Put lay too strong forward interesting. Learn argue glass matter upon.', 'Bookseller', NULL);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (15, 1, 'Phillip Hamilton', 'Building care door natural produce. Operation point loss mean production establish. Adult range true even matter.', 'Clinical molecular geneticist', -747302445.6363);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (16, 15, NULL, 'Work no none say heart information part. Dinner former manager mind scene ago. South ability no affect catch that area.', NULL, 3289626856.88503);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (17, 46, 'David Thompson', NULL, 'Media buyer', -56200327.351989);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (18, 28, NULL, 'Others development account. Scene increase simple as player use through. Seek third since laugh model make.', NULL, -66.535526629564);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (19, 14, 'Joseph Morales', 'Yeah sense up add subject research. Idea school still up radio. Local week color wait.', 'Engineer, automotive', -2879802387909.75);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (20, 32, 'Mary Martinez', 'Why break voice middle reflect yes. Third option chair decide.', NULL, -107235425.100455);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (21, 38, 'Calvin Berry', 'Parent shake now owner believe. Style believe tough wait candidate under. Every put college would from.', NULL, 203565594109.7);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (22, 12, 'Jeffrey Wright', 'Operation foreign loss manage each the. General college bed everybody. According speech personal task same yourself front.', 'Programme researcher, broadcasting/film/video', 6.65894555562242);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (23, 20, 'Jared Johnson', 'Car stand form parent. Song according foot choice space federal condition. Southern church inside series tell thank type.', 'Corporate investment banker', -17747043.9422207);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (24, 23, 'Kevin Li', NULL, 'Chief Financial Officer', 65293052794.3137);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (25, 42, 'Scott Rivera', 'Education training see we find knowledge treatment development. Address star role yard son speech Democrat. Give song computer respond current wife budget.', 'Multimedia specialist', -282658540693.727);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (26, 32, 'Dr. Sharon Johnson DVM', 'Unit in baby notice. Attack food laugh newspaper part better college.', 'Designer, jewellery', NULL);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (27, 4, NULL, NULL, 'Trading standards officer', NULL);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (28, 28, 'Amber Haley', 'Mr management admit any could. Senior current fact scientist nothing change suffer.', 'Academic librarian', -85926.9561386538);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (29, 30, NULL, 'Off government forget. Step generation beyond nor goal.', 'Administrator, education', NULL);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (30, 21, 'Linda Cardenas', 'Do issue let spend compare of.', 'Soil scientist', NULL);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (31, 3, NULL, NULL, 'Broadcast journalist', 716.12015619684);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (32, 13, 'James Thompson', 'Blue tend house staff commercial herself prove. Information cut message green early allow manage wind.', 'Art gallery manager', 5.79925836860272);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (33, 25, 'Andrew Wilson', 'Run some Congress result every war. Series window tax marriage. Size improve hit nice kind performance.', 'Medical laboratory scientific officer', NULL);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (34, 36, NULL, 'Modern democratic human difference rock music check close.', 'Air broker', NULL);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (35, 27, 'Carlos Richmond', 'Smile national eight she hand and democratic know. Establish indicate very art eat entire front bit. Man story around enter blue.', NULL, NULL);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (36, 7, 'Thomas Hall', NULL, 'Engineer, communications', -73537051905.4119);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (37, 40, NULL, 'Tough agree move analysis its body. Memory say together bit wish.', 'Surgeon', 158272936.836244);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (38, 3, 'Nicholas Yates', 'Magazine family vote support. Oil drive local cover interview us up.', 'Civil engineer, contracting', 59.8913565705882);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (39, 18, 'Timothy Murray', 'Start find cell animal ready at. Concern several than discuss personal interesting phone on. Woman travel not identify score.', 'Scientist, research (physical sciences)', 952552611.813392);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (40, 19, 'Matthew Rodriguez', 'Painting fast magazine east since use out. Will consider probably against.', 'Dealer', -1796360953754.94);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (41, 33, 'Kristina Mclean', 'Past two management friend pattern decade plant. Else represent detail open future rich. Sound late camera provide.', 'Print production planner', -781.280610714028);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (42, 8, 'Greg Morris', 'Room with travel responsibility cut hour. Ok final soldier against take budget agency century.', NULL, 0.41070866694563);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (43, 14, 'Nicole Ward', 'Shake property fish plan. Expert assume every walk degree rise laugh citizen. Coach yard treat.', 'Chief Executive Officer', 717058818.235333);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (44, 33, 'Kathleen Collins', NULL, 'Minerals surveyor', -670.76780904776);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (45, 48, 'Timothy Wagner PhD', 'Candidate defense discussion cell among.', 'Surveyor, minerals', -6955484409086.1);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (46, 19, 'Pamela Warren', 'Decision particular network pull organization serious leader. Easy hotel news film building finish relate. White message laugh billion onto.', 'Insurance risk surveyor', 769031419.456886);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (47, 44, 'Natalie Pacheco', 'Black cultural pull above us adult see body. Matter door tax. Feeling two customer season owner traditional fill.', 'Administrator, local government', -13.2701925998804);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (48, 9, 'Dennis Bailey', 'Report necessary lawyer else behind. Need simply growth television. Arm prove community expect live music. Five establish per floor world.', 'Magazine journalist', 7.87586542464429);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (49, 2, 'Steven Phillips', 'Ability citizen girl do them answer knowledge. Position out already agent actually whose.', NULL, NULL);
+INSERT INTO "employee" ("id", "farm_id", "name", "contact_information", "job_title", "pay_rate") VALUES (50, 5, NULL, 'Let receive scene no. Bit around election modern simple.', 'Telecommunications researcher', 5727400759.76595);
+
+-- equipment: 50 rows
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (1, 50, 'vqvo', 'dVHp', '2026-01-22', 'Question him amount. Resource box during star much. Change resource occur music item land.', 'lcxR');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (2, 23, 'sVvO', NULL, '2026-01-14', 'Accept teach short water career wind. Thus close among move class often.', 'fijJ');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (3, 2, 'lAyb', 'xswX', '2026-01-28', NULL, 'WbpL');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (4, 42, NULL, 'axXX', '2026-01-18', 'Worry put he ask. Guess what edge change structure. Outside voice measure under.', 'uLLJ');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (5, 46, 'ONgN', 'kwqD', '2026-01-13', 'House growth fish else. From side hear health. Standard increase deal citizen least organization.', 'QYLT');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (6, 19, 'pWax', NULL, NULL, 'Kid why nothing. Subject you face ready.', 'BaTN');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (7, 22, 'ozNF', 'FMBz', '2026-01-20', 'Compare television fly mean last. Test direction call adult toward small finish.', 'wGWo');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (8, 11, 'tKbF', 'Sirn', '2026-01-19', 'Perhaps where dinner according system.', NULL);
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (9, 2, 'Myiq', NULL, '2026-01-29', NULL, 'ZJmX');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (10, 21, NULL, NULL, '2026-01-07', 'Station than western lose throughout statement like. Air out price interest. Something face material however you.', 'pYDZ');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (11, 14, 'mSlF', NULL, '2026-01-23', 'Dark factor tell billion establish character.', 'ntik');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (12, 48, 'wnKL', NULL, '2026-01-08', 'Call various offer exist. Everything war he including.', 'vTMJ');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (13, 44, 'HOqg', 'JJZd', '2026-01-02', NULL, 'vUBM');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (14, 11, NULL, NULL, '2026-01-24', 'Soon budget instead property or their that nation. American call statement specific. Special might wish street space human.', 'ThgN');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (15, 10, NULL, 'Jmnu', '2026-01-27', NULL, 'zjcf');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (16, 11, 'cOwn', 'AKSP', '2026-01-06', 'Full billion rise situation event. Democratic summer itself tax. Whether exactly resource.', 'nGgZ');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (17, 39, NULL, 'WNxO', '2026-01-17', 'Do often not not produce enter political. Beyond former perform.', NULL);
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (18, 22, 'gpYt', 'YKeg', NULL, 'Chance foot candidate case research approach live. Dog than design staff forward respond bill. Dark power energy look source protect owner.', NULL);
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (19, 6, 'KzwB', 'qyki', '2026-01-29', 'Body doctor tough radio not account land. How eye fire growth alone. Occur person social.', NULL);
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (20, 49, 'VddA', 'NtCv', '2026-01-02', 'Blood event say son and give. Per second add picture. Better of music defense ok still beyond Congress.', 'jJpo');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (21, 19, 'EMqz', 'ndHH', '2026-01-24', 'Candidate reality process at direction. Choice their make eight.', 'ZmJc');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (22, 44, NULL, 'JSQy', NULL, 'Score speak answer fill on program others. Forward policy mouth success federal movement.', NULL);
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (23, 18, 'pvUt', NULL, '2026-01-12', 'Evening small focus floor subject debate. Field crime drug wall. Firm industry let summer.', 'rHxz');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (24, 19, 'eLEC', 'RgkO', '2026-01-06', 'Enter hope current page skill. International time sound here environment list. Opportunity trade along which worry door tonight.', 'UvBi');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (25, 17, 'GsWF', 'pOer', '2026-01-08', 'East actually response kid feeling. After level pattern side collection cold team. Human before tell ago question left meeting. Would arrive teacher where close.', 'nOhI');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (26, 38, 'HgHn', 'OXTV', '2026-01-28', NULL, 'zuro');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (27, 10, 'VMdu', 'RrfT', NULL, 'Structure control learn age great itself community require. System involve require region. Feel wear official area agency. Speech lawyer west particularly everything former.', 'xieP');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (28, 23, 'CIhU', 'gjkv', '2026-01-21', 'Economy goal government medical science mind through. Walk inside yes book.', 'TADY');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (29, 11, NULL, NULL, NULL, NULL, 'eVgU');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (30, 47, 'DOjy', 'VlAJ', '2026-01-02', 'Everything center wind note national finish. Country program prove very street know rich medical. Network alone culture exist.', 'nqdG');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (31, 13, NULL, 'xSUs', '2026-01-19', 'Cover feel debate. About into nearly water realize.', 'RgxA');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (32, 5, 'oWrX', NULL, NULL, 'Government choice before Democrat among hotel service. Forget crime resource door only. Sit six day.', 'klCo');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (33, 39, 'cfoz', 'zBOW', '2026-01-02', NULL, 'jNsT');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (34, 46, 'ZtPc', 'KntF', '2026-01-19', 'Purpose ready become leader difference ok some group. Tax financial scientist sign attention provide itself.', 'mFnF');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (35, 46, 'JRUz', 'HEkj', '2026-01-01', 'Available include there floor run bag should. Future people require quality information citizen without Mrs. Upon operation prevent manage line return.', NULL);
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (36, 43, 'RJxE', 'NePt', '2026-01-11', 'Goal position sing loss guess either not. Career professor experience ball role their once should. Wear southern lot consider stay throughout itself.', NULL);
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (37, 27, 'tBdS', 'ccpB', '2026-01-05', 'Like decide environment adult listen another.', 'bqjC');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (38, 11, 'Wknp', 'PoIQ', '2026-01-01', 'Major charge author themselves other today PM. Should enough act end value new.', 'fxUu');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (39, 16, 'OHPm', 'IRNZ', NULL, 'Night whether model citizen government. Expect theory meet morning. Head huge standard turn. Impact next not.', 'QVKU');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (40, 37, 'upWb', 'dcbo', '2026-01-16', 'Same wall wife before eight arm seven interest. Even side over role score.', 'iIhx');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (41, 46, NULL, NULL, '2026-01-18', NULL, 'Yrxd');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (42, 26, 'eAsZ', 'xrai', '2026-01-24', 'Daughter interest move authority compare. Do network expert relationship seven her personal Democrat. North while measure trial whose thus goal test.', 'uvTS');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (43, 6, 'MNYb', 'BWPU', '2026-01-06', 'Instead dream surface health heart hold. Those report reason country debate son stuff. Cover front system help.', 'egYM');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (44, 28, 'JNcx', 'jkwD', '2026-01-21', 'Various eye focus school yard. Production cause music picture. Business us region receive for data.', NULL);
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (45, 30, 'TsxN', 'dgSC', '2026-01-27', 'Admit live down daughter trip. Cup he father evidence question fund arrive clearly. Run its near really. Little Mr population add age letter religious.', 'pHdR');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (46, 26, 'gygA', 'iEKK', NULL, 'Hit thank most of up organization left. Laugh action short us.', 'EFyr');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (47, 1, NULL, 'PWDv', '2026-01-27', 'Offer present pretty language. Environment different some another run wall force.', 'FpML');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (48, 2, 'bIOm', 'KXvm', '2026-01-08', 'Mr consider that performance black red himself. Pattern hard however sign.', 'RAZI');
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (49, 43, NULL, NULL, '2026-01-24', 'Instead smile happen successful human. Public according understand happen begin actually.', NULL);
+INSERT INTO "equipment" ("id", "farm_id", "make", "model", "purchase_date", "maintenance_schedule", "condition") VALUES (50, 9, 'AnLB', 'pPOU', '2026-01-21', 'Admit play avoid few. Day dog receive wife. Fall spring choose power management sell.', 'FPNe');
+
+-- field: 50 rows
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (1, 34, NULL, 'atCU', 'rmGI');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (2, 41, -147338765458.189, NULL, 'XuzT');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (3, 6, NULL, NULL, 'swCE');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (4, 17, -2.63881602593158, 'nqWA', 'PBFd');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (5, 34, -368272280.65626, 'duFx', NULL);
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (6, 29, -1103.12876738567, NULL, 'VIsP');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (7, 42, -7921216513.85846, 'PDhw', 'RCPA');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (8, 5, NULL, 'IczI', 'wOaw');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (9, 30, 75.3875888700607, 'RTdt', 'GZIm');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (10, 9, 89800.9082910334, 'zhJd', 'quvd');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (11, 34, 8529368.78967168, 'bMPZ', NULL);
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (12, 28, -32806.6365888085, 'NVIR', 'oskp');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (13, 25, -33240429144.3994, 'Xrwm', 'KTuj');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (14, 8, NULL, 'eYym', NULL);
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (15, 9, NULL, 'WnNM', NULL);
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (16, 27, -25197374378.7964, 'StNf', 'VgXT');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (17, 4, 124711343.45777, 'fCst', NULL);
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (18, 5, -4620309.29866199, 'RJxH', 'MgOu');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (19, 40, -15873580.8977272, 'XjNE', 'NLyH');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (20, 30, -573258143.156624, NULL, 'RiZe');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (21, 13, 48350476750.708, NULL, NULL);
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (22, 2, 8282.51216302413, NULL, 'UyJw');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (23, 42, 8.82432045852557, 'UEbX', 'mIZA');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (24, 48, -59844636027864.9, 'JJpg', NULL);
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (25, 4, -9356221385858.39, 'PnFD', 'lOPQ');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (26, 17, NULL, 'LLsH', 'IEYx');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (27, 6, 8080325457646.19, 'Irde', 'ClYF');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (28, 3, NULL, 'PtOG', 'jkLe');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (29, 3, NULL, 'RpGR', 'TkDc');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (30, 45, NULL, NULL, 'hZHw');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (31, 41, -54.3987231554684, 'hAYV', 'FUML');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (32, 22, 600891.646027472, 'TLDt', 'bvIE');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (33, 44, -1807807139224.78, 'YxcX', 'LWlY');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (34, 22, NULL, 'tQlv', 'Eoyv');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (35, 27, 6104.46914291569, 'KCnD', NULL);
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (36, 37, -57782565.7190705, NULL, 'EmkE');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (37, 44, 69728977218530.0, 'kgkH', 'nRVh');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (38, 2, NULL, 'RhBm', NULL);
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (39, 4, 169062.405659627, NULL, 'khAv');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (40, 50, NULL, 'GWoR', 'Ddhh');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (41, 27, 11676851298.1298, 'alqD', 'LHjt');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (42, 16, -9345.84029193998, 'ourW', 'iUOF');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (43, 26, NULL, 'kvQm', 'piVN');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (44, 7, -50890203.1014246, 'LlMY', 'bsgd');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (45, 15, 20088201.3545429, 'teQm', 'bKCy');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (46, 38, NULL, 'BQEn', 'rSRe');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (47, 34, -503.362612433297, NULL, 'NbQc');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (48, 31, 9.66222389458106, 'CmSC', 'Gaqp');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (49, 26, 71273786100878.4, NULL, 'Wczx');
+INSERT INTO "field" ("id", "farm_id", "size", "location", "soil_type") VALUES (50, 4, NULL, 'Snpm', 'ubNT');
+
+-- field_crop: 100 rows
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (1, 47, 26);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (2, 28, 7);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (3, 46, 30);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (4, 39, 30);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (5, 11, 11);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (6, 22, 31);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (7, 27, 11);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (8, 38, 19);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (9, 49, 33);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (10, 8, 24);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (11, 23, 10);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (12, 41, 23);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (13, 50, 31);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (14, 41, 34);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (15, 49, 4);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (16, 13, 17);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (17, 12, 47);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (18, 38, 21);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (19, 19, 25);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (20, 41, 3);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (21, 19, 36);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (22, 28, 3);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (23, 44, 27);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (24, 18, 25);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (25, 47, 14);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (26, 23, 9);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (27, 9, 8);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (28, 40, 23);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (29, 11, 2);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (30, 28, 37);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (31, 26, 30);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (32, 5, 42);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (33, 46, 46);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (34, 44, 5);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (35, 50, 28);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (36, 35, 47);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (37, 36, 9);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (38, 11, 10);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (39, 14, 11);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (40, 15, 2);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (41, 34, 9);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (42, 32, 23);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (43, 40, 48);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (44, 19, 46);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (45, 22, 44);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (46, 8, 27);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (47, 50, 17);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (48, 11, 22);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (49, 41, 33);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (50, 22, 35);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (51, 45, 10);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (52, 25, 48);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (53, 48, 36);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (54, 20, 16);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (55, 25, 23);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (56, 25, 31);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (57, 33, 20);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (58, 27, 27);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (59, 7, 44);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (60, 10, 10);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (61, 1, 38);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (62, 39, 41);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (63, 46, 34);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (64, 7, 45);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (65, 50, 42);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (66, 45, 14);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (67, 39, 42);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (68, 39, 33);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (69, 8, 18);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (70, 45, 47);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (71, 40, 11);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (72, 25, 6);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (73, 3, 1);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (74, 8, 24);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (75, 47, 31);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (76, 21, 7);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (77, 44, 29);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (78, 24, 38);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (79, 45, 17);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (80, 43, 32);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (81, 50, 15);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (82, 11, 36);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (83, 36, 5);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (84, 50, 33);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (85, 11, 2);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (86, 42, 11);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (87, 34, 27);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (88, 39, 43);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (89, 14, 29);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (90, 46, 44);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (91, 26, 17);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (92, 2, 38);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (93, 9, 25);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (94, 11, 29);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (95, 37, 4);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (96, 25, 6);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (97, 42, 38);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (98, 26, 22);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (99, 15, 33);
+INSERT INTO "field_crop" ("id", "field_id", "crop_id") VALUES (100, 30, 3);
+
+-- harvest: 100 rows
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (1, 31, 40, NULL, 3852965717870.45);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (2, 32, 36, '2026-01-06', -286542.674421931);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (3, 12, 15, '2026-01-10', NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (4, 39, 10, '2026-01-10', -7692594.29381867);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (5, 31, 26, '2026-01-29', 2189111744242.43);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (6, 6, 17, '2026-01-29', 286494372673.73);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (7, 19, 10, '2026-01-22', NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (8, 43, 4, '2026-01-15', NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (9, 36, 13, NULL, 16927548206.3986);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (10, 36, 45, '2026-01-11', -3359719446.14021);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (11, 45, 7, '2026-01-08', -926401.879944393);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (12, 50, 22, '2026-01-13', 85.833701977546);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (13, 16, 15, '2026-01-10', 3.63707814367807);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (14, 18, 15, NULL, -67102136722.1683);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (15, 33, 22, NULL, -6.24994753547114);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (16, 28, 15, '2026-01-01', 79495319.2202798);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (17, 49, 10, '2026-01-19', 930781328.751506);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (18, 48, 50, '2026-01-10', 663564134.523953);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (19, 23, 19, '2026-01-03', NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (20, 50, 8, '2026-01-21', -5507.6617202418);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (21, 31, 15, '2026-01-10', 30588407.341009);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (22, 23, 28, '2026-01-24', 71.5406595279821);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (23, 50, 50, '2026-01-28', 236200.713365655);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (24, 7, 31, '2026-01-01', NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (25, 10, 23, '2026-01-24', 5104337562651.75);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (26, 22, 32, '2026-01-15', 5802494045.8722);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (27, 25, 30, '2026-01-05', 65905847511096.0);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (28, 37, 40, '2026-01-08', 4518304870910.39);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (29, 20, 32, '2026-01-04', 3942700242859.75);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (30, 1, 6, '2026-01-02', -42.418602499546);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (31, 15, 28, '2026-01-26', -6.364905491653);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (32, 3, 27, NULL, -22854939817.6875);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (33, 21, 12, NULL, -34485158979.9914);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (34, 24, 2, '2026-01-27', NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (35, 25, 35, NULL, NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (36, 39, 39, '2026-01-11', NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (37, 48, 30, NULL, NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (38, 40, 27, NULL, NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (39, 15, 15, '2026-01-15', 441187999958.838);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (40, 1, 28, '2026-01-13', 81775792758.2912);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (41, 3, 40, '2026-01-22', NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (42, 23, 46, '2026-01-29', 673616811157.746);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (43, 30, 42, NULL, -4.5507288155911);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (44, 17, 7, '2026-01-25', 525.242564966505);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (45, 45, 10, '2026-01-14', 7923676424.75561);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (46, 25, 14, '2026-01-15', -29.5401784014672);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (47, 13, 27, '2026-01-17', NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (48, 7, 45, '2026-01-26', NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (49, 29, 31, NULL, -4.53175474131456);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (50, 9, 27, '2026-01-24', NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (51, 33, 22, '2026-01-06', 427.191767826677);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (52, 30, 16, '2026-01-11', -7635165072.27578);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (53, 27, 2, '2026-01-27', -1587527.98917332);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (54, 36, 26, '2026-01-11', -40615.3237601407);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (55, 15, 28, '2026-01-02', 97958236847555.3);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (56, 10, 15, '2026-01-27', -67438153.1593572);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (57, 32, 39, '2026-01-05', NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (58, 34, 44, NULL, -8313038.62656337);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (59, 34, 41, '2026-01-03', -2035858884.87106);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (60, 10, 22, NULL, 666879.53108732);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (61, 11, 50, '2026-01-22', 32766.9563677606);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (62, 13, 27, '2026-01-02', NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (63, 4, 50, '2026-01-14', -6079166546088.18);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (64, 44, 34, NULL, -59894.4848389673);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (65, 34, 35, '2026-01-08', 61734418542.7437);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (66, 28, 10, '2026-01-06', -4252.19746241552);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (67, 43, 37, '2026-01-15', 41148036731632.4);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (68, 3, 16, '2026-01-12', -8566448140170.95);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (69, 21, 36, '2026-01-16', NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (70, 4, 9, '2026-01-09', 14506814.28951);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (71, 40, 15, '2026-01-18', NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (72, 49, 34, '2026-01-27', 5.46822895096023);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (73, 19, 44, '2026-01-12', 3860942799.8835);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (74, 11, 24, '2026-01-19', -5958735570.11042);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (75, 29, 26, '2026-01-03', 114075989499.8);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (76, 30, 5, NULL, 602.686391666087);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (77, 49, 10, '2026-01-14', 2629.66933188496);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (78, 30, 46, '2026-01-02', -9760.42460213708);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (79, 46, 3, NULL, 5.21600338118727);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (80, 27, 38, '2026-01-08', -5609492189.38669);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (81, 35, 14, '2026-01-10', 144977028.484265);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (82, 43, 9, '2026-01-24', 65.6848026656756);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (83, 20, 25, '2026-01-14', NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (84, 39, 47, '2026-01-11', NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (85, 27, 40, '2026-01-17', -7575.20094040952);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (86, 48, 2, '2026-01-21', -54883714.353971);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (87, 2, 38, '2026-01-03', 7121419458.75575);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (88, 10, 30, '2026-01-03', 3728247.25638);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (89, 18, 15, '2026-01-29', 4431709520.43565);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (90, 22, 15, '2026-01-02', -867.113351224338);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (91, 6, 3, NULL, -98942362.5548504);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (92, 37, 32, NULL, 88.4375641302567);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (93, 31, 28, '2026-01-08', -6.75279832704087);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (94, 2, 8, '2026-01-08', 4.87254204618998);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (95, 9, 49, NULL, NULL);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (96, 46, 28, '2026-01-06', -588345110305.254);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (97, 17, 25, NULL, -6722.8130946275);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (98, 40, 41, NULL, 940320344.380925);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (99, 35, 4, '2026-01-24', 19190546210376.4);
+INSERT INTO "harvest" ("id", "field_id", "crop_id", "date", "amount_harvested") VALUES (100, 11, 32, '2026-01-14', 382947304507.349);
+
+-- treatment: 50 rows
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (1, 17, '2026-01-25', 'oWpL', 'cGQm');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (2, 40, '2026-01-27', 'Fxlz', 'EFnC');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (3, 17, '2026-01-27', 'ySto', 'hHUD');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (4, 38, NULL, NULL, 'YANU');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (5, 15, '2026-01-14', 'ufgX', 'jPoF');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (6, 12, '2026-01-26', 'ldDl', 'HVEi');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (7, 39, '2026-01-02', 'plmM', NULL);
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (8, 47, '2026-01-02', 'vwXE', 'tYvK');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (9, 13, '2026-01-17', 'uftO', 'zeSX');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (10, 18, '2026-01-24', 'NOuL', NULL);
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (11, 43, '2026-01-18', 'YBgV', 'hRbj');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (12, 21, NULL, 'IKxZ', 'pbfJ');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (13, 8, NULL, 'gQtB', 'ysuE');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (14, 36, '2026-01-03', 'WprS', 'vAYu');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (15, 35, '2026-01-03', NULL, 'fecu');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (16, 30, '2026-01-28', NULL, 'iVdt');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (17, 28, '2026-01-29', 'XqZM', NULL);
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (18, 1, '2026-01-11', 'PHZu', 'Jnni');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (19, 43, '2026-01-22', 'yTjf', 'qVUU');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (20, 19, NULL, 'yuRv', 'sOBv');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (21, 45, '2026-01-10', 'ObYW', NULL);
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (22, 25, '2026-01-21', 'juei', 'oHiE');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (23, 21, '2026-01-16', 'LcCT', 'CIjP');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (24, 46, NULL, 'GyfM', 'MpDO');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (25, 15, '2026-01-21', 'JuJo', NULL);
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (26, 6, '2026-01-03', 'brNz', 'Sjoo');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (27, 29, NULL, 'PZNA', 'MGWl');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (28, 8, '2026-01-08', 'QdVp', 'gLap');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (29, 28, '2026-01-29', 'hePc', NULL);
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (30, 46, '2026-01-10', 'pjnv', 'AHAf');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (31, 10, '2026-01-18', 'LfuP', NULL);
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (32, 36, '2026-01-19', 'hGud', NULL);
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (33, 47, '2026-01-04', 'dstT', 'cZkg');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (34, 16, '2026-01-19', NULL, 'wskD');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (35, 44, NULL, 'QBWm', 'PVpf');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (36, 20, '2026-01-06', 'AkFL', 'HDIS');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (37, 2, '2026-01-26', 'lWaT', 'gbEj');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (38, 4, '2026-01-11', 'vKdf', 'GHqZ');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (39, 25, '2026-01-07', 'qvBh', NULL);
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (40, 6, '2026-01-20', 'SaUs', 'JStA');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (41, 1, '2026-01-16', 'FTtd', 'bFUi');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (42, 29, '2026-01-06', 'Qcnq', 'ohOH');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (43, 43, '2026-01-11', 'TmGs', 'BsZD');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (44, 11, '2026-01-24', 'NVKA', 'nnRa');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (45, 49, '2026-01-11', 'xVkt', NULL);
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (46, 29, '2026-01-11', 'cJBA', 'Ivni');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (47, 43, NULL, 'sfid', 'vdiP');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (48, 1, '2026-01-04', 'HhhU', 'dhjy');
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (49, 20, '2026-01-15', 'bCgm', NULL);
+INSERT INTO "treatment" ("id", "animal_id", "date", "type_of_treatment", "medication_used") VALUES (50, 31, '2026-01-25', 'JaZo', 'kaKC');

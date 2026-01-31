@@ -1,12 +1,24 @@
 {
   "tables": [
-    "users",
-    "posts",
-    "comments"
+    "animal",
+    "crop",
+    "farm",
+    "employee",
+    "equipment",
+    "field",
+    "field_crop",
+    "harvest",
+    "treatment"
   ],
   "row_counts": {
-    "users": 50,
-    "posts": 50,
-    "comments": 100
+    "animal": 50,
+    "crop": 50,
+    "farm": 50,
+    "employee": 50,
+    "equipment": 50,
+    "field": 50,
+    "field_crop": 100,
+    "harvest": 100,
+    "treatment": 50
   }
 }

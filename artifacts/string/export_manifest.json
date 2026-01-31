@@ -1,13 +1,25 @@
 {
   "json": [
-    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\users.json",
-    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\posts.json",
-    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\comments.json"
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\animal.json",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\crop.json",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\farm.json",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\employee.json",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\equipment.json",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\field.json",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\field_crop.json",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\harvest.json",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\treatment.json"
   ],
   "csv": [
-    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\users.csv",
-    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\posts.csv",
-    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\comments.csv"
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\animal.csv",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\crop.csv",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\farm.csv",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\employee.csv",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\equipment.csv",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\field.csv",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\field_crop.csv",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\harvest.csv",
+    "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\treatment.csv"
   ],
   "sql": {
     "sqlite": "C:\\Users\\asus\\OneDrive\\Desktop\\Gen AI Course Projects\\Synthetic Data Generation\\output\\export_sqlite.sql",

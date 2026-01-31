@@ -1,0 +1,502 @@
+[
+  {
+    "crop_id": 26,
+    "field_id": 47,
+    "id": 1
+  },
+  {
+    "crop_id": 7,
+    "field_id": 28,
+    "id": 2
+  },
+  {
+    "crop_id": 30,
+    "field_id": 46,
+    "id": 3
+  },
+  {
+    "crop_id": 30,
+    "field_id": 39,
+    "id": 4
+  },
+  {
+    "crop_id": 11,
+    "field_id": 11,
+    "id": 5
+  },
+  {
+    "crop_id": 31,
+    "field_id": 22,
+    "id": 6
+  },
+  {
+    "crop_id": 11,
+    "field_id": 27,
+    "id": 7
+  },
+  {
+    "crop_id": 19,
+    "field_id": 38,
+    "id": 8
+  },
+  {
+    "crop_id": 33,
+    "field_id": 49,
+    "id": 9
+  },
+  {
+    "crop_id": 24,
+    "field_id": 8,
+    "id": 10
+  },
+  {
+    "crop_id": 10,
+    "field_id": 23,
+    "id": 11
+  },
+  {
+    "crop_id": 23,
+    "field_id": 41,
+    "id": 12
+  },
+  {
+    "crop_id": 31,
+    "field_id": 50,
+    "id": 13
+  },
+  {
+    "crop_id": 34,
+    "field_id": 41,
+    "id": 14
+  },
+  {
+    "crop_id": 4,
+    "field_id": 49,
+    "id": 15
+  },
+  {
+    "crop_id": 17,
+    "field_id": 13,
+    "id": 16
+  },
+  {
+    "crop_id": 47,
+    "field_id": 12,
+    "id": 17
+  },
+  {
+    "crop_id": 21,
+    "field_id": 38,
+    "id": 18
+  },
+  {
+    "crop_id": 25,
+    "field_id": 19,
+    "id": 19
+  },
+  {
+    "crop_id": 3,
+    "field_id": 41,
+    "id": 20
+  },
+  {
+    "crop_id": 36,
+    "field_id": 19,
+    "id": 21
+  },
+  {
+    "crop_id": 3,
+    "field_id": 28,
+    "id": 22
+  },
+  {
+    "crop_id": 27,
+    "field_id": 44,
+    "id": 23
+  },
+  {
+    "crop_id": 25,
+    "field_id": 18,
+    "id": 24
+  },
+  {
+    "crop_id": 14,
+    "field_id": 47,
+    "id": 25
+  },
+  {
+    "crop_id": 9,
+    "field_id": 23,
+    "id": 26
+  },
+  {
+    "crop_id": 8,
+    "field_id": 9,
+    "id": 27
+  },
+  {
+    "crop_id": 23,
+    "field_id": 40,
+    "id": 28
+  },
+  {
+    "crop_id": 2,
+    "field_id": 11,
+    "id": 29
+  },
+  {
+    "crop_id": 37,
+    "field_id": 28,
+    "id": 30
+  },
+  {
+    "crop_id": 30,
+    "field_id": 26,
+    "id": 31
+  },
+  {
+    "crop_id": 42,
+    "field_id": 5,
+    "id": 32
+  },
+  {
+    "crop_id": 46,
+    "field_id": 46,
+    "id": 33
+  },
+  {
+    "crop_id": 5,
+    "field_id": 44,
+    "id": 34
+  },
+  {
+    "crop_id": 28,
+    "field_id": 50,
+    "id": 35
+  },
+  {
+    "crop_id": 47,
+    "field_id": 35,
+    "id": 36
+  },
+  {
+    "crop_id": 9,
+    "field_id": 36,
+    "id": 37
+  },
+  {
+    "crop_id": 10,
+    "field_id": 11,
+    "id": 38
+  },
+  {
+    "crop_id": 11,
+    "field_id": 14,
+    "id": 39
+  },
+  {
+    "crop_id": 2,
+    "field_id": 15,
+    "id": 40
+  },
+  {
+    "crop_id": 9,
+    "field_id": 34,
+    "id": 41
+  },
+  {
+    "crop_id": 23,
+    "field_id": 32,
+    "id": 42
+  },
+  {
+    "crop_id": 48,
+    "field_id": 40,
+    "id": 43
+  },
+  {
+    "crop_id": 46,
+    "field_id": 19,
+    "id": 44
+  },
+  {
+    "crop_id": 44,
+    "field_id": 22,
+    "id": 45
+  },
+  {
+    "crop_id": 27,
+    "field_id": 8,
+    "id": 46
+  },
+  {
+    "crop_id": 17,
+    "field_id": 50,
+    "id": 47
+  },
+  {
+    "crop_id": 22,
+    "field_id": 11,
+    "id": 48
+  },
+  {
+    "crop_id": 33,
+    "field_id": 41,
+    "id": 49
+  },
+  {
+    "crop_id": 35,
+    "field_id": 22,
+    "id": 50
+  },
+  {
+    "crop_id": 10,
+    "field_id": 45,
+    "id": 51
+  },
+  {
+    "crop_id": 48,
+    "field_id": 25,
+    "id": 52
+  },
+  {
+    "crop_id": 36,
+    "field_id": 48,
+    "id": 53
+  },
+  {
+    "crop_id": 16,
+    "field_id": 20,
+    "id": 54
+  },
+  {
+    "crop_id": 23,
+    "field_id": 25,
+    "id": 55
+  },
+  {
+    "crop_id": 31,
+    "field_id": 25,
+    "id": 56
+  },
+  {
+    "crop_id": 20,
+    "field_id": 33,
+    "id": 57
+  },
+  {
+    "crop_id": 27,
+    "field_id": 27,
+    "id": 58
+  },
+  {
+    "crop_id": 44,
+    "field_id": 7,
+    "id": 59
+  },
+  {
+    "crop_id": 10,
+    "field_id": 10,
+    "id": 60
+  },
+  {
+    "crop_id": 38,
+    "field_id": 1,
+    "id": 61
+  },
+  {
+    "crop_id": 41,
+    "field_id": 39,
+    "id": 62
+  },
+  {
+    "crop_id": 34,
+    "field_id": 46,
+    "id": 63
+  },
+  {
+    "crop_id": 45,
+    "field_id": 7,
+    "id": 64
+  },
+  {
+    "crop_id": 42,
+    "field_id": 50,
+    "id": 65
+  },
+  {
+    "crop_id": 14,
+    "field_id": 45,
+    "id": 66
+  },
+  {
+    "crop_id": 42,
+    "field_id": 39,
+    "id": 67
+  },
+  {
+    "crop_id": 33,
+    "field_id": 39,
+    "id": 68
+  },
+  {
+    "crop_id": 18,
+    "field_id": 8,
+    "id": 69
+  },
+  {
+    "crop_id": 47,
+    "field_id": 45,
+    "id": 70
+  },
+  {
+    "crop_id": 11,
+    "field_id": 40,
+    "id": 71
+  },
+  {
+    "crop_id": 6,
+    "field_id": 25,
+    "id": 72
+  },
+  {
+    "crop_id": 1,
+    "field_id": 3,
+    "id": 73
+  },
+  {
+    "crop_id": 24,
+    "field_id": 8,
+    "id": 74
+  },
+  {
+    "crop_id": 31,
+    "field_id": 47,
+    "id": 75
+  },
+  {
+    "crop_id": 7,
+    "field_id": 21,
+    "id": 76
+  },
+  {
+    "crop_id": 29,
+    "field_id": 44,
+    "id": 77
+  },
+  {
+    "crop_id": 38,
+    "field_id": 24,
+    "id": 78
+  },
+  {
+    "crop_id": 17,
+    "field_id": 45,
+    "id": 79
+  },
+  {
+    "crop_id": 32,
+    "field_id": 43,
+    "id": 80
+  },
+  {
+    "crop_id": 15,
+    "field_id": 50,
+    "id": 81
+  },
+  {
+    "crop_id": 36,
+    "field_id": 11,
+    "id": 82
+  },
+  {
+    "crop_id": 5,
+    "field_id": 36,
+    "id": 83
+  },
+  {
+    "crop_id": 33,
+    "field_id": 50,
+    "id": 84
+  },
+  {
+    "crop_id": 2,
+    "field_id": 11,
+    "id": 85
+  },
+  {
+    "crop_id": 11,
+    "field_id": 42,
+    "id": 86
+  },
+  {
+    "crop_id": 27,
+    "field_id": 34,
+    "id": 87
+  },
+  {
+    "crop_id": 43,
+    "field_id": 39,
+    "id": 88
+  },
+  {
+    "crop_id": 29,
+    "field_id": 14,
+    "id": 89
+  },
+  {
+    "crop_id": 44,
+    "field_id": 46,
+    "id": 90
+  },
+  {
+    "crop_id": 17,
+    "field_id": 26,
+    "id": 91
+  },
+  {
+    "crop_id": 38,
+    "field_id": 2,
+    "id": 92
+  },
+  {
+    "crop_id": 25,
+    "field_id": 9,
+    "id": 93
+  },
+  {
+    "crop_id": 29,
+    "field_id": 11,
+    "id": 94
+  },
+  {
+    "crop_id": 4,
+    "field_id": 37,
+    "id": 95
+  },
+  {
+    "crop_id": 6,
+    "field_id": 25,
+    "id": 96
+  },
+  {
+    "crop_id": 38,
+    "field_id": 42,
+    "id": 97
+  },
+  {
+    "crop_id": 22,
+    "field_id": 26,
+    "id": 98
+  },
+  {
+    "crop_id": 33,
+    "field_id": 15,
+    "id": 99
+  },
+  {
+    "crop_id": 3,
+    "field_id": 30,
+    "id": 100
+  }
+]

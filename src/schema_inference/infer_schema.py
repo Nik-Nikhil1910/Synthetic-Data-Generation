@@ -70,6 +70,10 @@ from .infer_schema_validator import (
 )
 
 
+# Load environment variables FIRST, before any other imports
+from dotenv import load_dotenv
+load_dotenv()
+
 # =============================================================================
 # EXCEPTIONS
 # =============================================================================

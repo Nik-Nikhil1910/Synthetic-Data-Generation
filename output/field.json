@@ -1,0 +1,352 @@
+[
+  {
+    "farm_id": 34,
+    "id": 1,
+    "location": "atCU",
+    "size": null,
+    "soil_type": "rmGI"
+  },
+  {
+    "farm_id": 41,
+    "id": 2,
+    "location": null,
+    "size": -147338765458.189,
+    "soil_type": "XuzT"
+  },
+  {
+    "farm_id": 6,
+    "id": 3,
+    "location": null,
+    "size": null,
+    "soil_type": "swCE"
+  },
+  {
+    "farm_id": 17,
+    "id": 4,
+    "location": "nqWA",
+    "size": -2.63881602593158,
+    "soil_type": "PBFd"
+  },
+  {
+    "farm_id": 34,
+    "id": 5,
+    "location": "duFx",
+    "size": -368272280.65626,
+    "soil_type": null
+  },
+  {
+    "farm_id": 29,
+    "id": 6,
+    "location": null,
+    "size": -1103.12876738567,
+    "soil_type": "VIsP"
+  },
+  {
+    "farm_id": 42,
+    "id": 7,
+    "location": "PDhw",
+    "size": -7921216513.85846,
+    "soil_type": "RCPA"
+  },
+  {
+    "farm_id": 5,
+    "id": 8,
+    "location": "IczI",
+    "size": null,
+    "soil_type": "wOaw"
+  },
+  {
+    "farm_id": 30,
+    "id": 9,
+    "location": "RTdt",
+    "size": 75.3875888700607,
+    "soil_type": "GZIm"
+  },
+  {
+    "farm_id": 9,
+    "id": 10,
+    "location": "zhJd",
+    "size": 89800.9082910334,
+    "soil_type": "quvd"
+  },
+  {
+    "farm_id": 34,
+    "id": 11,
+    "location": "bMPZ",
+    "size": 8529368.78967168,
+    "soil_type": null
+  },
+  {
+    "farm_id": 28,
+    "id": 12,
+    "location": "NVIR",
+    "size": -32806.6365888085,
+    "soil_type": "oskp"
+  },
+  {
+    "farm_id": 25,
+    "id": 13,
+    "location": "Xrwm",
+    "size": -33240429144.3994,
+    "soil_type": "KTuj"
+  },
+  {
+    "farm_id": 8,
+    "id": 14,
+    "location": "eYym",
+    "size": null,
+    "soil_type": null
+  },
+  {
+    "farm_id": 9,
+    "id": 15,
+    "location": "WnNM",
+    "size": null,
+    "soil_type": null
+  },
+  {
+    "farm_id": 27,
+    "id": 16,
+    "location": "StNf",
+    "size": -25197374378.7964,
+    "soil_type": "VgXT"
+  },
+  {
+    "farm_id": 4,
+    "id": 17,
+    "location": "fCst",
+    "size": 124711343.45777,
+    "soil_type": null
+  },
+  {
+    "farm_id": 5,
+    "id": 18,
+    "location": "RJxH",
+    "size": -4620309.29866199,
+    "soil_type": "MgOu"
+  },
+  {
+    "farm_id": 40,
+    "id": 19,
+    "location": "XjNE",
+    "size": -15873580.8977272,
+    "soil_type": "NLyH"
+  },
+  {
+    "farm_id": 30,
+    "id": 20,
+    "location": null,
+    "size": -573258143.156624,
+    "soil_type": "RiZe"
+  },
+  {
+    "farm_id": 13,
+    "id": 21,
+    "location": null,
+    "size": 48350476750.708,
+    "soil_type": null
+  },
+  {
+    "farm_id": 2,
+    "id": 22,
+    "location": null,
+    "size": 8282.51216302413,
+    "soil_type": "UyJw"
+  },
+  {
+    "farm_id": 42,
+    "id": 23,
+    "location": "UEbX",
+    "size": 8.82432045852557,
+    "soil_type": "mIZA"
+  },
+  {
+    "farm_id": 48,
+    "id": 24,
+    "location": "JJpg",
+    "size": -59844636027864.9,
+    "soil_type": null
+  },
+  {
+    "farm_id": 4,
+    "id": 25,
+    "location": "PnFD",
+    "size": -9356221385858.39,
+    "soil_type": "lOPQ"
+  },
+  {
+    "farm_id": 17,
+    "id": 26,
+    "location": "LLsH",
+    "size": null,
+    "soil_type": "IEYx"
+  },
+  {
+    "farm_id": 6,
+    "id": 27,
+    "location": "Irde",
+    "size": 8080325457646.19,
+    "soil_type": "ClYF"
+  },
+  {
+    "farm_id": 3,
+    "id": 28,
+    "location": "PtOG",
+    "size": null,
+    "soil_type": "jkLe"
+  },
+  {
+    "farm_id": 3,
+    "id": 29,
+    "location": "RpGR",
+    "size": null,
+    "soil_type": "TkDc"
+  },
+  {
+    "farm_id": 45,
+    "id": 30,
+    "location": null,
+    "size": null,
+    "soil_type": "hZHw"
+  },
+  {
+    "farm_id": 41,
+    "id": 31,
+    "location": "hAYV",
+    "size": -54.3987231554684,
+    "soil_type": "FUML"
+  },
+  {
+    "farm_id": 22,
+    "id": 32,
+    "location": "TLDt",
+    "size": 600891.646027472,
+    "soil_type": "bvIE"
+  },
+  {
+    "farm_id": 44,
+    "id": 33,
+    "location": "YxcX",
+    "size": -1807807139224.78,
+    "soil_type": "LWlY"
+  },
+  {
+    "farm_id": 22,
+    "id": 34,
+    "location": "tQlv",
+    "size": null,
+    "soil_type": "Eoyv"
+  },
+  {
+    "farm_id": 27,
+    "id": 35,
+    "location": "KCnD",
+    "size": 6104.46914291569,
+    "soil_type": null
+  },
+  {
+    "farm_id": 37,
+    "id": 36,
+    "location": null,
+    "size": -57782565.7190705,
+    "soil_type": "EmkE"
+  },
+  {
+    "farm_id": 44,
+    "id": 37,
+    "location": "kgkH",
+    "size": 69728977218530.0,
+    "soil_type": "nRVh"
+  },
+  {
+    "farm_id": 2,
+    "id": 38,
+    "location": "RhBm",
+    "size": null,
+    "soil_type": null
+  },
+  {
+    "farm_id": 4,
+    "id": 39,
+    "location": null,
+    "size": 169062.405659627,
+    "soil_type": "khAv"
+  },
+  {
+    "farm_id": 50,
+    "id": 40,
+    "location": "GWoR",
+    "size": null,
+    "soil_type": "Ddhh"
+  },
+  {
+    "farm_id": 27,
+    "id": 41,
+    "location": "alqD",
+    "size": 11676851298.1298,
+    "soil_type": "LHjt"
+  },
+  {
+    "farm_id": 16,
+    "id": 42,
+    "location": "ourW",
+    "size": -9345.84029193998,
+    "soil_type": "iUOF"
+  },
+  {
+    "farm_id": 26,
+    "id": 43,
+    "location": "kvQm",
+    "size": null,
+    "soil_type": "piVN"
+  },
+  {
+    "farm_id": 7,
+    "id": 44,
+    "location": "LlMY",
+    "size": -50890203.1014246,
+    "soil_type": "bsgd"
+  },
+  {
+    "farm_id": 15,
+    "id": 45,
+    "location": "teQm",
+    "size": 20088201.3545429,
+    "soil_type": "bKCy"
+  },
+  {
+    "farm_id": 38,
+    "id": 46,
+    "location": "BQEn",
+    "size": null,
+    "soil_type": "rSRe"
+  },
+  {
+    "farm_id": 34,
+    "id": 47,
+    "location": null,
+    "size": -503.362612433297,
+    "soil_type": "NbQc"
+  },
+  {
+    "farm_id": 31,
+    "id": 48,
+    "location": "CmSC",
+    "size": 9.66222389458106,
+    "soil_type": "Gaqp"
+  },
+  {
+    "farm_id": 26,
+    "id": 49,
+    "location": null,
+    "size": 71273786100878.4,
+    "soil_type": "Wczx"
+  },
+  {
+    "farm_id": 4,
+    "id": 50,
+    "location": "Snpm",
+    "size": null,
+    "soil_type": "ubNT"
+  }
+]

@@ -1,0 +1,702 @@
+[
+  {
+    "amount_harvested": 3852965717870.45,
+    "crop_id": 40,
+    "date": null,
+    "field_id": 31,
+    "id": 1
+  },
+  {
+    "amount_harvested": -286542.674421931,
+    "crop_id": 36,
+    "date": "2026-01-06",
+    "field_id": 32,
+    "id": 2
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 15,
+    "date": "2026-01-10",
+    "field_id": 12,
+    "id": 3
+  },
+  {
+    "amount_harvested": -7692594.29381867,
+    "crop_id": 10,
+    "date": "2026-01-10",
+    "field_id": 39,
+    "id": 4
+  },
+  {
+    "amount_harvested": 2189111744242.43,
+    "crop_id": 26,
+    "date": "2026-01-29",
+    "field_id": 31,
+    "id": 5
+  },
+  {
+    "amount_harvested": 286494372673.73,
+    "crop_id": 17,
+    "date": "2026-01-29",
+    "field_id": 6,
+    "id": 6
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 10,
+    "date": "2026-01-22",
+    "field_id": 19,
+    "id": 7
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 4,
+    "date": "2026-01-15",
+    "field_id": 43,
+    "id": 8
+  },
+  {
+    "amount_harvested": 16927548206.3986,
+    "crop_id": 13,
+    "date": null,
+    "field_id": 36,
+    "id": 9
+  },
+  {
+    "amount_harvested": -3359719446.14021,
+    "crop_id": 45,
+    "date": "2026-01-11",
+    "field_id": 36,
+    "id": 10
+  },
+  {
+    "amount_harvested": -926401.879944393,
+    "crop_id": 7,
+    "date": "2026-01-08",
+    "field_id": 45,
+    "id": 11
+  },
+  {
+    "amount_harvested": 85.833701977546,
+    "crop_id": 22,
+    "date": "2026-01-13",
+    "field_id": 50,
+    "id": 12
+  },
+  {
+    "amount_harvested": 3.63707814367807,
+    "crop_id": 15,
+    "date": "2026-01-10",
+    "field_id": 16,
+    "id": 13
+  },
+  {
+    "amount_harvested": -67102136722.1683,
+    "crop_id": 15,
+    "date": null,
+    "field_id": 18,
+    "id": 14
+  },
+  {
+    "amount_harvested": -6.24994753547114,
+    "crop_id": 22,
+    "date": null,
+    "field_id": 33,
+    "id": 15
+  },
+  {
+    "amount_harvested": 79495319.2202798,
+    "crop_id": 15,
+    "date": "2026-01-01",
+    "field_id": 28,
+    "id": 16
+  },
+  {
+    "amount_harvested": 930781328.751506,
+    "crop_id": 10,
+    "date": "2026-01-19",
+    "field_id": 49,
+    "id": 17
+  },
+  {
+    "amount_harvested": 663564134.523953,
+    "crop_id": 50,
+    "date": "2026-01-10",
+    "field_id": 48,
+    "id": 18
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 19,
+    "date": "2026-01-03",
+    "field_id": 23,
+    "id": 19
+  },
+  {
+    "amount_harvested": -5507.6617202418,
+    "crop_id": 8,
+    "date": "2026-01-21",
+    "field_id": 50,
+    "id": 20
+  },
+  {
+    "amount_harvested": 30588407.341009,
+    "crop_id": 15,
+    "date": "2026-01-10",
+    "field_id": 31,
+    "id": 21
+  },
+  {
+    "amount_harvested": 71.5406595279821,
+    "crop_id": 28,
+    "date": "2026-01-24",
+    "field_id": 23,
+    "id": 22
+  },
+  {
+    "amount_harvested": 236200.713365655,
+    "crop_id": 50,
+    "date": "2026-01-28",
+    "field_id": 50,
+    "id": 23
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 31,
+    "date": "2026-01-01",
+    "field_id": 7,
+    "id": 24
+  },
+  {
+    "amount_harvested": 5104337562651.75,
+    "crop_id": 23,
+    "date": "2026-01-24",
+    "field_id": 10,
+    "id": 25
+  },
+  {
+    "amount_harvested": 5802494045.8722,
+    "crop_id": 32,
+    "date": "2026-01-15",
+    "field_id": 22,
+    "id": 26
+  },
+  {
+    "amount_harvested": 65905847511096.0,
+    "crop_id": 30,
+    "date": "2026-01-05",
+    "field_id": 25,
+    "id": 27
+  },
+  {
+    "amount_harvested": 4518304870910.39,
+    "crop_id": 40,
+    "date": "2026-01-08",
+    "field_id": 37,
+    "id": 28
+  },
+  {
+    "amount_harvested": 3942700242859.75,
+    "crop_id": 32,
+    "date": "2026-01-04",
+    "field_id": 20,
+    "id": 29
+  },
+  {
+    "amount_harvested": -42.418602499546,
+    "crop_id": 6,
+    "date": "2026-01-02",
+    "field_id": 1,
+    "id": 30
+  },
+  {
+    "amount_harvested": -6.364905491653,
+    "crop_id": 28,
+    "date": "2026-01-26",
+    "field_id": 15,
+    "id": 31
+  },
+  {
+    "amount_harvested": -22854939817.6875,
+    "crop_id": 27,
+    "date": null,
+    "field_id": 3,
+    "id": 32
+  },
+  {
+    "amount_harvested": -34485158979.9914,
+    "crop_id": 12,
+    "date": null,
+    "field_id": 21,
+    "id": 33
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 2,
+    "date": "2026-01-27",
+    "field_id": 24,
+    "id": 34
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 35,
+    "date": null,
+    "field_id": 25,
+    "id": 35
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 39,
+    "date": "2026-01-11",
+    "field_id": 39,
+    "id": 36
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 30,
+    "date": null,
+    "field_id": 48,
+    "id": 37
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 27,
+    "date": null,
+    "field_id": 40,
+    "id": 38
+  },
+  {
+    "amount_harvested": 441187999958.838,
+    "crop_id": 15,
+    "date": "2026-01-15",
+    "field_id": 15,
+    "id": 39
+  },
+  {
+    "amount_harvested": 81775792758.2912,
+    "crop_id": 28,
+    "date": "2026-01-13",
+    "field_id": 1,
+    "id": 40
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 40,
+    "date": "2026-01-22",
+    "field_id": 3,
+    "id": 41
+  },
+  {
+    "amount_harvested": 673616811157.746,
+    "crop_id": 46,
+    "date": "2026-01-29",
+    "field_id": 23,
+    "id": 42
+  },
+  {
+    "amount_harvested": -4.5507288155911,
+    "crop_id": 42,
+    "date": null,
+    "field_id": 30,
+    "id": 43
+  },
+  {
+    "amount_harvested": 525.242564966505,
+    "crop_id": 7,
+    "date": "2026-01-25",
+    "field_id": 17,
+    "id": 44
+  },
+  {
+    "amount_harvested": 7923676424.75561,
+    "crop_id": 10,
+    "date": "2026-01-14",
+    "field_id": 45,
+    "id": 45
+  },
+  {
+    "amount_harvested": -29.5401784014672,
+    "crop_id": 14,
+    "date": "2026-01-15",
+    "field_id": 25,
+    "id": 46
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 27,
+    "date": "2026-01-17",
+    "field_id": 13,
+    "id": 47
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 45,
+    "date": "2026-01-26",
+    "field_id": 7,
+    "id": 48
+  },
+  {
+    "amount_harvested": -4.53175474131456,
+    "crop_id": 31,
+    "date": null,
+    "field_id": 29,
+    "id": 49
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 27,
+    "date": "2026-01-24",
+    "field_id": 9,
+    "id": 50
+  },
+  {
+    "amount_harvested": 427.191767826677,
+    "crop_id": 22,
+    "date": "2026-01-06",
+    "field_id": 33,
+    "id": 51
+  },
+  {
+    "amount_harvested": -7635165072.27578,
+    "crop_id": 16,
+    "date": "2026-01-11",
+    "field_id": 30,
+    "id": 52
+  },
+  {
+    "amount_harvested": -1587527.98917332,
+    "crop_id": 2,
+    "date": "2026-01-27",
+    "field_id": 27,
+    "id": 53
+  },
+  {
+    "amount_harvested": -40615.3237601407,
+    "crop_id": 26,
+    "date": "2026-01-11",
+    "field_id": 36,
+    "id": 54
+  },
+  {
+    "amount_harvested": 97958236847555.3,
+    "crop_id": 28,
+    "date": "2026-01-02",
+    "field_id": 15,
+    "id": 55
+  },
+  {
+    "amount_harvested": -67438153.1593572,
+    "crop_id": 15,
+    "date": "2026-01-27",
+    "field_id": 10,
+    "id": 56
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 39,
+    "date": "2026-01-05",
+    "field_id": 32,
+    "id": 57
+  },
+  {
+    "amount_harvested": -8313038.62656337,
+    "crop_id": 44,
+    "date": null,
+    "field_id": 34,
+    "id": 58
+  },
+  {
+    "amount_harvested": -2035858884.87106,
+    "crop_id": 41,
+    "date": "2026-01-03",
+    "field_id": 34,
+    "id": 59
+  },
+  {
+    "amount_harvested": 666879.53108732,
+    "crop_id": 22,
+    "date": null,
+    "field_id": 10,
+    "id": 60
+  },
+  {
+    "amount_harvested": 32766.9563677606,
+    "crop_id": 50,
+    "date": "2026-01-22",
+    "field_id": 11,
+    "id": 61
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 27,
+    "date": "2026-01-02",
+    "field_id": 13,
+    "id": 62
+  },
+  {
+    "amount_harvested": -6079166546088.18,
+    "crop_id": 50,
+    "date": "2026-01-14",
+    "field_id": 4,
+    "id": 63
+  },
+  {
+    "amount_harvested": -59894.4848389673,
+    "crop_id": 34,
+    "date": null,
+    "field_id": 44,
+    "id": 64
+  },
+  {
+    "amount_harvested": 61734418542.7437,
+    "crop_id": 35,
+    "date": "2026-01-08",
+    "field_id": 34,
+    "id": 65
+  },
+  {
+    "amount_harvested": -4252.19746241552,
+    "crop_id": 10,
+    "date": "2026-01-06",
+    "field_id": 28,
+    "id": 66
+  },
+  {
+    "amount_harvested": 41148036731632.4,
+    "crop_id": 37,
+    "date": "2026-01-15",
+    "field_id": 43,
+    "id": 67
+  },
+  {
+    "amount_harvested": -8566448140170.95,
+    "crop_id": 16,
+    "date": "2026-01-12",
+    "field_id": 3,
+    "id": 68
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 36,
+    "date": "2026-01-16",
+    "field_id": 21,
+    "id": 69
+  },
+  {
+    "amount_harvested": 14506814.28951,
+    "crop_id": 9,
+    "date": "2026-01-09",
+    "field_id": 4,
+    "id": 70
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 15,
+    "date": "2026-01-18",
+    "field_id": 40,
+    "id": 71
+  },
+  {
+    "amount_harvested": 5.46822895096023,
+    "crop_id": 34,
+    "date": "2026-01-27",
+    "field_id": 49,
+    "id": 72
+  },
+  {
+    "amount_harvested": 3860942799.8835,
+    "crop_id": 44,
+    "date": "2026-01-12",
+    "field_id": 19,
+    "id": 73
+  },
+  {
+    "amount_harvested": -5958735570.11042,
+    "crop_id": 24,
+    "date": "2026-01-19",
+    "field_id": 11,
+    "id": 74
+  },
+  {
+    "amount_harvested": 114075989499.8,
+    "crop_id": 26,
+    "date": "2026-01-03",
+    "field_id": 29,
+    "id": 75
+  },
+  {
+    "amount_harvested": 602.686391666087,
+    "crop_id": 5,
+    "date": null,
+    "field_id": 30,
+    "id": 76
+  },
+  {
+    "amount_harvested": 2629.66933188496,
+    "crop_id": 10,
+    "date": "2026-01-14",
+    "field_id": 49,
+    "id": 77
+  },
+  {
+    "amount_harvested": -9760.42460213708,
+    "crop_id": 46,
+    "date": "2026-01-02",
+    "field_id": 30,
+    "id": 78
+  },
+  {
+    "amount_harvested": 5.21600338118727,
+    "crop_id": 3,
+    "date": null,
+    "field_id": 46,
+    "id": 79
+  },
+  {
+    "amount_harvested": -5609492189.38669,
+    "crop_id": 38,
+    "date": "2026-01-08",
+    "field_id": 27,
+    "id": 80
+  },
+  {
+    "amount_harvested": 144977028.484265,
+    "crop_id": 14,
+    "date": "2026-01-10",
+    "field_id": 35,
+    "id": 81
+  },
+  {
+    "amount_harvested": 65.6848026656756,
+    "crop_id": 9,
+    "date": "2026-01-24",
+    "field_id": 43,
+    "id": 82
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 25,
+    "date": "2026-01-14",
+    "field_id": 20,
+    "id": 83
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 47,
+    "date": "2026-01-11",
+    "field_id": 39,
+    "id": 84
+  },
+  {
+    "amount_harvested": -7575.20094040952,
+    "crop_id": 40,
+    "date": "2026-01-17",
+    "field_id": 27,
+    "id": 85
+  },
+  {
+    "amount_harvested": -54883714.353971,
+    "crop_id": 2,
+    "date": "2026-01-21",
+    "field_id": 48,
+    "id": 86
+  },
+  {
+    "amount_harvested": 7121419458.75575,
+    "crop_id": 38,
+    "date": "2026-01-03",
+    "field_id": 2,
+    "id": 87
+  },
+  {
+    "amount_harvested": 3728247.25638,
+    "crop_id": 30,
+    "date": "2026-01-03",
+    "field_id": 10,
+    "id": 88
+  },
+  {
+    "amount_harvested": 4431709520.43565,
+    "crop_id": 15,
+    "date": "2026-01-29",
+    "field_id": 18,
+    "id": 89
+  },
+  {
+    "amount_harvested": -867.113351224338,
+    "crop_id": 15,
+    "date": "2026-01-02",
+    "field_id": 22,
+    "id": 90
+  },
+  {
+    "amount_harvested": -98942362.5548504,
+    "crop_id": 3,
+    "date": null,
+    "field_id": 6,
+    "id": 91
+  },
+  {
+    "amount_harvested": 88.4375641302567,
+    "crop_id": 32,
+    "date": null,
+    "field_id": 37,
+    "id": 92
+  },
+  {
+    "amount_harvested": -6.75279832704087,
+    "crop_id": 28,
+    "date": "2026-01-08",
+    "field_id": 31,
+    "id": 93
+  },
+  {
+    "amount_harvested": 4.87254204618998,
+    "crop_id": 8,
+    "date": "2026-01-08",
+    "field_id": 2,
+    "id": 94
+  },
+  {
+    "amount_harvested": null,
+    "crop_id": 49,
+    "date": null,
+    "field_id": 9,
+    "id": 95
+  },
+  {
+    "amount_harvested": -588345110305.254,
+    "crop_id": 28,
+    "date": "2026-01-06",
+    "field_id": 46,
+    "id": 96
+  },
+  {
+    "amount_harvested": -6722.8130946275,
+    "crop_id": 25,
+    "date": null,
+    "field_id": 17,
+    "id": 97
+  },
+  {
+    "amount_harvested": 940320344.380925,
+    "crop_id": 41,
+    "date": null,
+    "field_id": 40,
+    "id": 98
+  },
+  {
+    "amount_harvested": 19190546210376.4,
+    "crop_id": 4,
+    "date": "2026-01-24",
+    "field_id": 35,
+    "id": 99
+  },
+  {
+    "amount_harvested": 382947304507.349,
+    "crop_id": 32,
+    "date": "2026-01-14",
+    "field_id": 11,
+    "id": 100
+  }
+]

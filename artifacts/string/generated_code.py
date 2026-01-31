@@ -14,60 +14,264 @@ random.seed(0)
 # Data store: table_name -> list of records
 data_store = {}
 
-# Initialize table: users
-data_store['users'] = []
+# Initialize table: animal
+data_store['animal'] = []
 
-# Initialize table: posts
-data_store['posts'] = []
+# Initialize table: crop
+data_store['crop'] = []
 
-# Initialize table: comments
-data_store['comments'] = []
+# Initialize table: farm
+data_store['farm'] = []
 
-# Generate rows for: users
-for _row_idx_users in range(50):
+# Initialize table: employee
+data_store['employee'] = []
+
+# Initialize table: equipment
+data_store['equipment'] = []
+
+# Initialize table: field
+data_store['field'] = []
+
+# Initialize table: field_crop
+data_store['field_crop'] = []
+
+# Initialize table: harvest
+data_store['harvest'] = []
+
+# Initialize table: treatment
+data_store['treatment'] = []
+
+# Generate rows for: animal
+for _row_idx_animal in range(50):
     _record = {}
     # Primary key (sequential integer)
-    _record['id'] = _row_idx_users + 1
-    # Faker: user_name
-    _record['username'] = fake.user_name()
-    # Faker: lexify
-    _record['password'] = fake.lexify()
-    # Faker: email
-    _record['email'] = fake.email()
-    data_store['users'].append(_record)
+    _record['id'] = _row_idx_animal + 1
+    # Faker: lexify (nullable)
+    if random.random() < 0.2:
+        _record['species'] = None
+    else:
+        _record['species'] = fake.lexify()
+    # Faker: lexify (nullable)
+    if random.random() < 0.2:
+        _record['breed'] = None
+    else:
+        _record['breed'] = fake.lexify()
+    # Faker: date_of_birth (nullable)
+    if random.random() < 0.2:
+        _record['birthdate'] = None
+    else:
+        _record['birthdate'] = fake.date_of_birth()
+    # Faker: paragraph (nullable)
+    if random.random() < 0.2:
+        _record['health_records'] = None
+    else:
+        _record['health_records'] = fake.paragraph()
+    data_store['animal'].append(_record)
 
-# Generate rows for: posts
-for _row_idx_posts in range(50):
+# Generate rows for: crop
+for _row_idx_crop in range(50):
     _record = {}
     # Primary key (sequential integer)
-    _record['id'] = _row_idx_posts + 1
-    # Foreign key -> users.id
-    _parent_ids = [r['id'] for r in data_store['users']]
-    _record['user_id'] = random.choice(_parent_ids)
-    # Faker: sentence
-    _record['title'] = fake.sentence()
-    # Faker: paragraph
-    _record['content'] = fake.paragraph()
-    # Faker: date_this_year
-    _record['publication_date'] = fake.date_this_year()
-    data_store['posts'].append(_record)
+    _record['id'] = _row_idx_crop + 1
+    # Faker: lexify (nullable)
+    if random.random() < 0.2:
+        _record['variety'] = None
+    else:
+        _record['variety'] = fake.lexify()
+    # Faker: date_this_year (nullable)
+    if random.random() < 0.2:
+        _record['planting_date'] = None
+    else:
+        _record['planting_date'] = fake.date_this_year()
+    # Faker: pyfloat (nullable)
+    if random.random() < 0.2:
+        _record['expected_yield'] = None
+    else:
+        _record['expected_yield'] = fake.pyfloat()
+    # Faker: paragraph (nullable)
+    if random.random() < 0.2:
+        _record['care_requirements'] = None
+    else:
+        _record['care_requirements'] = fake.paragraph()
+    data_store['crop'].append(_record)
 
-# Generate rows for: comments
-for _row_idx_comments in range(100):
+# Generate rows for: farm
+for _row_idx_farm in range(50):
     _record = {}
     # Primary key (sequential integer)
-    _record['id'] = _row_idx_comments + 1
-    # Foreign key -> posts.id
-    _parent_ids = [r['id'] for r in data_store['posts']]
-    _record['post_id'] = random.choice(_parent_ids)
-    # Foreign key -> users.id
-    _parent_ids = [r['id'] for r in data_store['users']]
-    _record['user_id'] = random.choice(_parent_ids)
-    # Faker: paragraph
-    _record['text'] = fake.paragraph()
-    # Faker: date_this_year
-    _record['date_posted'] = fake.date_this_year()
-    data_store['comments'].append(_record)
+    _record['id'] = _row_idx_farm + 1
+    # Faker: name (nullable)
+    if random.random() < 0.2:
+        _record['name'] = None
+    else:
+        _record['name'] = fake.name()
+    # Faker: lexify (nullable)
+    if random.random() < 0.2:
+        _record['location'] = None
+    else:
+        _record['location'] = fake.lexify()
+    # Faker: pyfloat (nullable)
+    if random.random() < 0.2:
+        _record['size'] = None
+    else:
+        _record['size'] = fake.pyfloat()
+    # Faker: paragraph (nullable)
+    if random.random() < 0.2:
+        _record['contact_information'] = None
+    else:
+        _record['contact_information'] = fake.paragraph()
+    data_store['farm'].append(_record)
+
+# Generate rows for: employee
+for _row_idx_employee in range(50):
+    _record = {}
+    # Primary key (sequential integer)
+    _record['id'] = _row_idx_employee + 1
+    # Foreign key -> farm.id
+    _parent_ids = [r['id'] for r in data_store['farm']]
+    _record['farm_id'] = random.choice(_parent_ids)
+    # Faker: name (nullable)
+    if random.random() < 0.2:
+        _record['name'] = None
+    else:
+        _record['name'] = fake.name()
+    # Faker: paragraph (nullable)
+    if random.random() < 0.2:
+        _record['contact_information'] = None
+    else:
+        _record['contact_information'] = fake.paragraph()
+    # Faker: job (nullable)
+    if random.random() < 0.2:
+        _record['job_title'] = None
+    else:
+        _record['job_title'] = fake.job()
+    # Faker: pyfloat (nullable)
+    if random.random() < 0.2:
+        _record['pay_rate'] = None
+    else:
+        _record['pay_rate'] = fake.pyfloat()
+    data_store['employee'].append(_record)
+
+# Generate rows for: equipment
+for _row_idx_equipment in range(50):
+    _record = {}
+    # Primary key (sequential integer)
+    _record['id'] = _row_idx_equipment + 1
+    # Foreign key -> farm.id
+    _parent_ids = [r['id'] for r in data_store['farm']]
+    _record['farm_id'] = random.choice(_parent_ids)
+    # Faker: lexify (nullable)
+    if random.random() < 0.2:
+        _record['make'] = None
+    else:
+        _record['make'] = fake.lexify()
+    # Faker: lexify (nullable)
+    if random.random() < 0.2:
+        _record['model'] = None
+    else:
+        _record['model'] = fake.lexify()
+    # Faker: date_this_year (nullable)
+    if random.random() < 0.2:
+        _record['purchase_date'] = None
+    else:
+        _record['purchase_date'] = fake.date_this_year()
+    # Faker: paragraph (nullable)
+    if random.random() < 0.2:
+        _record['maintenance_schedule'] = None
+    else:
+        _record['maintenance_schedule'] = fake.paragraph()
+    # Faker: lexify (nullable)
+    if random.random() < 0.2:
+        _record['condition'] = None
+    else:
+        _record['condition'] = fake.lexify()
+    data_store['equipment'].append(_record)
+
+# Generate rows for: field
+for _row_idx_field in range(50):
+    _record = {}
+    # Primary key (sequential integer)
+    _record['id'] = _row_idx_field + 1
+    # Foreign key -> farm.id
+    _parent_ids = [r['id'] for r in data_store['farm']]
+    _record['farm_id'] = random.choice(_parent_ids)
+    # Faker: pyfloat (nullable)
+    if random.random() < 0.2:
+        _record['size'] = None
+    else:
+        _record['size'] = fake.pyfloat()
+    # Faker: lexify (nullable)
+    if random.random() < 0.2:
+        _record['location'] = None
+    else:
+        _record['location'] = fake.lexify()
+    # Faker: lexify (nullable)
+    if random.random() < 0.2:
+        _record['soil_type'] = None
+    else:
+        _record['soil_type'] = fake.lexify()
+    data_store['field'].append(_record)
+
+# Generate rows for: field_crop
+for _row_idx_field_crop in range(100):
+    _record = {}
+    # Primary key (sequential integer)
+    _record['id'] = _row_idx_field_crop + 1
+    # Foreign key -> field.id
+    _parent_ids = [r['id'] for r in data_store['field']]
+    _record['field_id'] = random.choice(_parent_ids)
+    # Foreign key -> crop.id
+    _parent_ids = [r['id'] for r in data_store['crop']]
+    _record['crop_id'] = random.choice(_parent_ids)
+    data_store['field_crop'].append(_record)
+
+# Generate rows for: harvest
+for _row_idx_harvest in range(100):
+    _record = {}
+    # Primary key (sequential integer)
+    _record['id'] = _row_idx_harvest + 1
+    # Foreign key -> field.id
+    _parent_ids = [r['id'] for r in data_store['field']]
+    _record['field_id'] = random.choice(_parent_ids)
+    # Foreign key -> crop.id
+    _parent_ids = [r['id'] for r in data_store['crop']]
+    _record['crop_id'] = random.choice(_parent_ids)
+    # Faker: date_this_year (nullable)
+    if random.random() < 0.2:
+        _record['date'] = None
+    else:
+        _record['date'] = fake.date_this_year()
+    # Faker: pyfloat (nullable)
+    if random.random() < 0.2:
+        _record['amount_harvested'] = None
+    else:
+        _record['amount_harvested'] = fake.pyfloat()
+    data_store['harvest'].append(_record)
+
+# Generate rows for: treatment
+for _row_idx_treatment in range(50):
+    _record = {}
+    # Primary key (sequential integer)
+    _record['id'] = _row_idx_treatment + 1
+    # Foreign key -> animal.id
+    _parent_ids = [r['id'] for r in data_store['animal']]
+    _record['animal_id'] = random.choice(_parent_ids)
+    # Faker: date_this_year (nullable)
+    if random.random() < 0.2:
+        _record['date'] = None
+    else:
+        _record['date'] = fake.date_this_year()
+    # Faker: lexify (nullable)
+    if random.random() < 0.2:
+        _record['type_of_treatment'] = None
+    else:
+        _record['type_of_treatment'] = fake.lexify()
+    # Faker: lexify (nullable)
+    if random.random() < 0.2:
+        _record['medication_used'] = None
+    else:
+        _record['medication_used'] = fake.lexify()
+    data_store['treatment'].append(_record)
 
 # Summary
 for _tbl_name, _tbl_rows in data_store.items():
